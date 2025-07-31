@@ -9,7 +9,7 @@ __all__ = ["APIKey"]
 
 
 class APIKey(BaseModel):
-    id: int
+    id: str
 
     created_at: datetime
 

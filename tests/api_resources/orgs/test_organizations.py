@@ -58,7 +58,7 @@ class TestOrganizations:
     @parametrize
     def test_method_retrieve(self, client: Entities) -> None:
         organization = client.orgs.organizations.retrieve(
-            "id",
+            0,
         )
         assert_matches_type(Organization, organization, path=["response"])
 
@@ -66,7 +66,7 @@ class TestOrganizations:
     @parametrize
     def test_raw_response_retrieve(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.retrieve(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -78,7 +78,7 @@ class TestOrganizations:
     @parametrize
     def test_streaming_response_retrieve(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.retrieve(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -90,17 +90,9 @@ class TestOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_retrieve(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.orgs.organizations.with_raw_response.retrieve(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_update(self, client: Entities) -> None:
         organization = client.orgs.organizations.update(
-            id="id",
+            id=0,
         )
         assert_matches_type(Organization, organization, path=["response"])
 
@@ -108,7 +100,7 @@ class TestOrganizations:
     @parametrize
     def test_method_update_with_all_params(self, client: Entities) -> None:
         organization = client.orgs.organizations.update(
-            id="id",
+            id=0,
             name="name",
         )
         assert_matches_type(Organization, organization, path=["response"])
@@ -117,7 +109,7 @@ class TestOrganizations:
     @parametrize
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.update(
-            id="id",
+            id=0,
         )
 
         assert response.is_closed is True
@@ -129,7 +121,7 @@ class TestOrganizations:
     @parametrize
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.update(
-            id="id",
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -138,14 +130,6 @@ class TestOrganizations:
             assert_matches_type(Organization, organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_update(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.orgs.organizations.with_raw_response.update(
-                id="",
-            )
 
     @pytest.mark.skip()
     @parametrize
@@ -179,7 +163,7 @@ class TestOrganizations:
     @parametrize
     def test_method_delete(self, client: Entities) -> None:
         organization = client.orgs.organizations.delete(
-            "id",
+            0,
         )
         assert organization is None
 
@@ -187,7 +171,7 @@ class TestOrganizations:
     @parametrize
     def test_raw_response_delete(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.delete(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -199,7 +183,7 @@ class TestOrganizations:
     @parametrize
     def test_streaming_response_delete(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.delete(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -208,14 +192,6 @@ class TestOrganizations:
             assert organization is None
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_delete(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.orgs.organizations.with_raw_response.delete(
-                "",
-            )
 
 
 class TestAsyncOrganizations:
@@ -261,7 +237,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.retrieve(
-            "id",
+            0,
         )
         assert_matches_type(Organization, organization, path=["response"])
 
@@ -269,7 +245,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.retrieve(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -281,7 +257,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.retrieve(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -293,17 +269,9 @@ class TestAsyncOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.orgs.organizations.with_raw_response.retrieve(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.update(
-            id="id",
+            id=0,
         )
         assert_matches_type(Organization, organization, path=["response"])
 
@@ -311,7 +279,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.update(
-            id="id",
+            id=0,
             name="name",
         )
         assert_matches_type(Organization, organization, path=["response"])
@@ -320,7 +288,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.update(
-            id="id",
+            id=0,
         )
 
         assert response.is_closed is True
@@ -332,7 +300,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.update(
-            id="id",
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -341,14 +309,6 @@ class TestAsyncOrganizations:
             assert_matches_type(Organization, organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_update(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.orgs.organizations.with_raw_response.update(
-                id="",
-            )
 
     @pytest.mark.skip()
     @parametrize
@@ -382,7 +342,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_delete(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.delete(
-            "id",
+            0,
         )
         assert organization is None
 
@@ -390,7 +350,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.delete(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -402,7 +362,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.delete(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -411,11 +371,3 @@ class TestAsyncOrganizations:
             assert organization is None
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_delete(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.orgs.organizations.with_raw_response.delete(
-                "",
-            )

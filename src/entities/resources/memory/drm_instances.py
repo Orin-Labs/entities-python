@@ -45,11 +45,8 @@ class DrmInstancesResource(SyncAPIResource):
     def create(
         self,
         *,
-        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
-        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -69,14 +66,11 @@ class DrmInstancesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/memory/drm-instances/",
+            "/api/memory/drm-instances/",
             body=maybe_transform(
                 {
-                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
-                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "summarizer_name_prefix": summarizer_name_prefix,
                     "timezone": timezone,
                 },
                 drm_instance_create_params.DrmInstanceCreateParams,
@@ -89,7 +83,7 @@ class DrmInstancesResource(SyncAPIResource):
 
     def retrieve(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -108,10 +102,8 @@ class DrmInstancesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/memory/drm-instances/{id}/",
+            f"/api/memory/drm-instances/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -120,13 +112,10 @@ class DrmInstancesResource(SyncAPIResource):
 
     def update(
         self,
-        id: str,
+        id: int,
         *,
-        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
-        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -145,17 +134,12 @@ class DrmInstancesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
-            f"/memory/drm-instances/{id}/",
+            f"/api/memory/drm-instances/{id}/",
             body=maybe_transform(
                 {
-                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
-                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "summarizer_name_prefix": summarizer_name_prefix,
                     "timezone": timezone,
                 },
                 drm_instance_update_params.DrmInstanceUpdateParams,
@@ -177,7 +161,7 @@ class DrmInstancesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DrmInstanceListResponse:
         return self._get(
-            "/memory/drm-instances/",
+            "/api/memory/drm-instances/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -186,7 +170,7 @@ class DrmInstancesResource(SyncAPIResource):
 
     def delete(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -205,11 +189,9 @@ class DrmInstancesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/memory/drm-instances/{id}/",
+            f"/api/memory/drm-instances/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -218,7 +200,7 @@ class DrmInstancesResource(SyncAPIResource):
 
     def get_memory_context(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -239,10 +221,39 @@ class DrmInstancesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/memory/drm-instances/{id}/memory_context/",
+            f"/api/memory/drm-instances/{id}/memory-context/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    def get_messages(
+        self,
+        id: int,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Get messages for this DRM instance.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            f"/api/memory/drm-instances/{id}/messages/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -251,13 +262,10 @@ class DrmInstancesResource(SyncAPIResource):
 
     def log_messages(
         self,
-        id: str,
+        id: int,
         *,
-        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
-        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -278,17 +286,12 @@ class DrmInstancesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
-            f"/memory/drm-instances/{id}/log_messages/",
+            f"/api/memory/drm-instances/{id}/log-messages/",
             body=maybe_transform(
                 {
-                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
-                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "summarizer_name_prefix": summarizer_name_prefix,
                     "timezone": timezone,
                 },
                 drm_instance_log_messages_params.DrmInstanceLogMessagesParams,
@@ -323,11 +326,8 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
-        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -347,14 +347,11 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/memory/drm-instances/",
+            "/api/memory/drm-instances/",
             body=await async_maybe_transform(
                 {
-                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
-                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "summarizer_name_prefix": summarizer_name_prefix,
                     "timezone": timezone,
                 },
                 drm_instance_create_params.DrmInstanceCreateParams,
@@ -367,7 +364,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -386,10 +383,8 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/memory/drm-instances/{id}/",
+            f"/api/memory/drm-instances/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -398,13 +393,10 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
     async def update(
         self,
-        id: str,
+        id: int,
         *,
-        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
-        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -423,17 +415,12 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
-            f"/memory/drm-instances/{id}/",
+            f"/api/memory/drm-instances/{id}/",
             body=await async_maybe_transform(
                 {
-                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
-                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "summarizer_name_prefix": summarizer_name_prefix,
                     "timezone": timezone,
                 },
                 drm_instance_update_params.DrmInstanceUpdateParams,
@@ -455,7 +442,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DrmInstanceListResponse:
         return await self._get(
-            "/memory/drm-instances/",
+            "/api/memory/drm-instances/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -464,7 +451,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
     async def delete(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -483,11 +470,9 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/memory/drm-instances/{id}/",
+            f"/api/memory/drm-instances/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -496,7 +481,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
     async def get_memory_context(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -517,10 +502,39 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/memory/drm-instances/{id}/memory_context/",
+            f"/api/memory/drm-instances/{id}/memory-context/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    async def get_messages(
+        self,
+        id: int,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Get messages for this DRM instance.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            f"/api/memory/drm-instances/{id}/messages/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -529,13 +543,10 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
     async def log_messages(
         self,
-        id: str,
+        id: int,
         *,
-        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
-        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -556,17 +567,12 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
-            f"/memory/drm-instances/{id}/log_messages/",
+            f"/api/memory/drm-instances/{id}/log-messages/",
             body=await async_maybe_transform(
                 {
-                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
-                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "summarizer_name_prefix": summarizer_name_prefix,
                     "timezone": timezone,
                 },
                 drm_instance_log_messages_params.DrmInstanceLogMessagesParams,
@@ -600,6 +606,9 @@ class DrmInstancesResourceWithRawResponse:
         self.get_memory_context = to_raw_response_wrapper(
             drm_instances.get_memory_context,
         )
+        self.get_messages = to_raw_response_wrapper(
+            drm_instances.get_messages,
+        )
         self.log_messages = to_raw_response_wrapper(
             drm_instances.log_messages,
         )
@@ -626,6 +635,9 @@ class AsyncDrmInstancesResourceWithRawResponse:
         )
         self.get_memory_context = async_to_raw_response_wrapper(
             drm_instances.get_memory_context,
+        )
+        self.get_messages = async_to_raw_response_wrapper(
+            drm_instances.get_messages,
         )
         self.log_messages = async_to_raw_response_wrapper(
             drm_instances.log_messages,
@@ -654,6 +666,9 @@ class DrmInstancesResourceWithStreamingResponse:
         self.get_memory_context = to_streamed_response_wrapper(
             drm_instances.get_memory_context,
         )
+        self.get_messages = to_streamed_response_wrapper(
+            drm_instances.get_messages,
+        )
         self.log_messages = to_streamed_response_wrapper(
             drm_instances.log_messages,
         )
@@ -680,6 +695,9 @@ class AsyncDrmInstancesResourceWithStreamingResponse:
         )
         self.get_memory_context = async_to_streamed_response_wrapper(
             drm_instances.get_memory_context,
+        )
+        self.get_messages = async_to_streamed_response_wrapper(
+            drm_instances.get_messages,
         )
         self.log_messages = async_to_streamed_response_wrapper(
             drm_instances.log_messages,
