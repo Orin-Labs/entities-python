@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Union, Iterable
+from datetime import datetime
+from typing_extensions import Required, Annotated, TypedDict
+
+from ..._utils import PropertyInfo
 
 __all__ = ["DrmInstanceLogMessagesParams"]
 
 
 class DrmInstanceLogMessagesParams(TypedDict, total=False):
-    name: str
+    messages: Required[Iterable[object]]
+    """Array of OpenAI-format messages"""
 
-    summarizer_model: str
-
-    timezone: str
+    timestamp: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """Optional timestamp for all messages (defaults to now)"""
