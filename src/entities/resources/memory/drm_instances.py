@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Union, Iterable
+from datetime import datetime
+
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
@@ -18,6 +21,9 @@ from ..._base_client import make_request_options
 from ...types.memory import drm_instance_create_params, drm_instance_update_params, drm_instance_log_messages_params
 from ...types.memory.drm_instance import DrmInstance
 from ...types.memory.drm_instance_list_response import DrmInstanceListResponse
+from ...types.memory.drm_instance_get_messages_response import DrmInstanceGetMessagesResponse
+from ...types.memory.drm_instance_log_messages_response import DrmInstanceLogMessagesResponse
+from ...types.memory.drm_instance_get_memory_context_response import DrmInstanceGetMemoryContextResponse
 
 __all__ = ["DrmInstancesResource", "AsyncDrmInstancesResource"]
 
@@ -134,7 +140,7 @@ class DrmInstancesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._put(
+        return self._patch(
             f"/api/memory/drm-instances/{id}/",
             body=maybe_transform(
                 {
@@ -208,9 +214,9 @@ class DrmInstancesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DrmInstance:
+    ) -> DrmInstanceGetMemoryContextResponse:
         """
-        Get formatted memory context for this DRM instance.
+        Get memory context for this DRM instance
 
         Args:
           extra_headers: Send extra headers
@@ -226,7 +232,7 @@ class DrmInstancesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DrmInstance,
+            cast_to=DrmInstanceGetMemoryContextResponse,
         )
 
     def get_messages(
@@ -239,9 +245,9 @@ class DrmInstancesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DrmInstance:
+    ) -> DrmInstanceGetMessagesResponse:
         """
-        Get messages for this DRM instance.
+        Get messages for this DRM instance
 
         Args:
           extra_headers: Send extra headers
@@ -257,27 +263,30 @@ class DrmInstancesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DrmInstance,
+            cast_to=DrmInstanceGetMessagesResponse,
         )
 
     def log_messages(
         self,
         id: int,
         *,
-        name: str | NotGiven = NOT_GIVEN,
-        summarizer_model: str | NotGiven = NOT_GIVEN,
-        timezone: str | NotGiven = NOT_GIVEN,
+        messages: Iterable[object],
+        timestamp: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DrmInstance:
+    ) -> DrmInstanceLogMessagesResponse:
         """
-        Log messages to this DRM instance.
+        Log messages to this DRM instance
 
         Args:
+          messages: Array of OpenAI-format messages
+
+          timestamp: Optional timestamp for all messages (defaults to now)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -290,16 +299,15 @@ class DrmInstancesResource(SyncAPIResource):
             f"/api/memory/drm-instances/{id}/log-messages/",
             body=maybe_transform(
                 {
-                    "name": name,
-                    "summarizer_model": summarizer_model,
-                    "timezone": timezone,
+                    "messages": messages,
+                    "timestamp": timestamp,
                 },
                 drm_instance_log_messages_params.DrmInstanceLogMessagesParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DrmInstance,
+            cast_to=DrmInstanceLogMessagesResponse,
         )
 
 
@@ -415,7 +423,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._put(
+        return await self._patch(
             f"/api/memory/drm-instances/{id}/",
             body=await async_maybe_transform(
                 {
@@ -489,9 +497,9 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DrmInstance:
+    ) -> DrmInstanceGetMemoryContextResponse:
         """
-        Get formatted memory context for this DRM instance.
+        Get memory context for this DRM instance
 
         Args:
           extra_headers: Send extra headers
@@ -507,7 +515,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DrmInstance,
+            cast_to=DrmInstanceGetMemoryContextResponse,
         )
 
     async def get_messages(
@@ -520,9 +528,9 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DrmInstance:
+    ) -> DrmInstanceGetMessagesResponse:
         """
-        Get messages for this DRM instance.
+        Get messages for this DRM instance
 
         Args:
           extra_headers: Send extra headers
@@ -538,27 +546,30 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DrmInstance,
+            cast_to=DrmInstanceGetMessagesResponse,
         )
 
     async def log_messages(
         self,
         id: int,
         *,
-        name: str | NotGiven = NOT_GIVEN,
-        summarizer_model: str | NotGiven = NOT_GIVEN,
-        timezone: str | NotGiven = NOT_GIVEN,
+        messages: Iterable[object],
+        timestamp: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DrmInstance:
+    ) -> DrmInstanceLogMessagesResponse:
         """
-        Log messages to this DRM instance.
+        Log messages to this DRM instance
 
         Args:
+          messages: Array of OpenAI-format messages
+
+          timestamp: Optional timestamp for all messages (defaults to now)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -571,16 +582,15 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
             f"/api/memory/drm-instances/{id}/log-messages/",
             body=await async_maybe_transform(
                 {
-                    "name": name,
-                    "summarizer_model": summarizer_model,
-                    "timezone": timezone,
+                    "messages": messages,
+                    "timestamp": timestamp,
                 },
                 drm_instance_log_messages_params.DrmInstanceLogMessagesParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DrmInstance,
+            cast_to=DrmInstanceLogMessagesResponse,
         )
 
 

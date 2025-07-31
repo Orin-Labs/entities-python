@@ -9,9 +9,13 @@ import pytest
 
 from entities import Entities, AsyncEntities
 from tests.utils import assert_matches_type
+from entities._utils import parse_datetime
 from entities.types.memory import (
     DrmInstance,
     DrmInstanceListResponse,
+    DrmInstanceGetMessagesResponse,
+    DrmInstanceLogMessagesResponse,
+    DrmInstanceGetMemoryContextResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -205,7 +209,7 @@ class TestDrmInstances:
         drm_instance = client.memory.drm_instances.get_memory_context(
             0,
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -217,7 +221,7 @@ class TestDrmInstances:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         drm_instance = response.parse()
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -229,7 +233,7 @@ class TestDrmInstances:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             drm_instance = response.parse()
-            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+            assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -239,7 +243,7 @@ class TestDrmInstances:
         drm_instance = client.memory.drm_instances.get_messages(
             0,
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -251,7 +255,7 @@ class TestDrmInstances:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         drm_instance = response.parse()
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -263,7 +267,7 @@ class TestDrmInstances:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             drm_instance = response.parse()
-            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+            assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -272,43 +276,45 @@ class TestDrmInstances:
     def test_method_log_messages(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.log_messages(
             id=0,
+            messages=[{}],
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_log_messages_with_all_params(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.log_messages(
             id=0,
-            name="name",
-            summarizer_model="summarizer_model",
-            timezone="timezone",
+            messages=[{}],
+            timestamp=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_log_messages(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.log_messages(
             id=0,
+            messages=[{}],
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         drm_instance = response.parse()
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_log_messages(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.log_messages(
             id=0,
+            messages=[{}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             drm_instance = response.parse()
-            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+            assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -503,7 +509,7 @@ class TestAsyncDrmInstances:
         drm_instance = await async_client.memory.drm_instances.get_memory_context(
             0,
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -515,7 +521,7 @@ class TestAsyncDrmInstances:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         drm_instance = await response.parse()
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -527,7 +533,7 @@ class TestAsyncDrmInstances:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             drm_instance = await response.parse()
-            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+            assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -537,7 +543,7 @@ class TestAsyncDrmInstances:
         drm_instance = await async_client.memory.drm_instances.get_messages(
             0,
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -549,7 +555,7 @@ class TestAsyncDrmInstances:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         drm_instance = await response.parse()
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -561,7 +567,7 @@ class TestAsyncDrmInstances:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             drm_instance = await response.parse()
-            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+            assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -570,42 +576,44 @@ class TestAsyncDrmInstances:
     async def test_method_log_messages(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.log_messages(
             id=0,
+            messages=[{}],
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_log_messages_with_all_params(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.log_messages(
             id=0,
-            name="name",
-            summarizer_model="summarizer_model",
-            timezone="timezone",
+            messages=[{}],
+            timestamp=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_log_messages(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.log_messages(
             id=0,
+            messages=[{}],
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         drm_instance = await response.parse()
-        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+        assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_log_messages(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.log_messages(
             id=0,
+            messages=[{}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             drm_instance = await response.parse()
-            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+            assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
