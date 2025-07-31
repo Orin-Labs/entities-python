@@ -24,7 +24,7 @@ from pydantic import ValidationError
 from entities import Entities, AsyncEntities, APIResponseValidationError
 from entities._types import Omit
 from entities._models import BaseModel, FinalRequestOptions
-from entities._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from entities._exceptions import EntitiesError, APIStatusError, APITimeoutError, APIResponseValidationError
 from entities._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
@@ -341,19 +341,10 @@ class TestEntities:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with update_env(**{"ENTITIES_API_KEY": Omit()}):
-            client2 = Entities(base_url=base_url, api_key=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
-        )
-        assert request2.headers.get("Authorization") is None
+        with pytest.raises(EntitiesError):
+            with update_env(**{"ENTITIES_API_KEY": Omit()}):
+                client2 = Entities(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Entities(
@@ -723,7 +714,7 @@ class TestEntities:
     @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Entities) -> None:
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             client.memory.drm_instances.with_streaming_response.list().__enter__()
@@ -733,7 +724,7 @@ class TestEntities:
     @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Entities) -> None:
-        respx_mock.get("/memory/drm-instances/").mock(return_value=httpx.Response(500))
+        respx_mock.get("/api/memory/drm-instances/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             client.memory.drm_instances.with_streaming_response.list().__enter__()
@@ -763,7 +754,7 @@ class TestEntities:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=retry_handler)
 
         response = client.memory.drm_instances.with_raw_response.list()
 
@@ -787,7 +778,7 @@ class TestEntities:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=retry_handler)
 
         response = client.memory.drm_instances.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
@@ -810,7 +801,7 @@ class TestEntities:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=retry_handler)
 
         response = client.memory.drm_instances.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
@@ -1151,19 +1142,10 @@ class TestAsyncEntities:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with update_env(**{"ENTITIES_API_KEY": Omit()}):
-            client2 = AsyncEntities(base_url=base_url, api_key=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
-        )
-        assert request2.headers.get("Authorization") is None
+        with pytest.raises(EntitiesError):
+            with update_env(**{"ENTITIES_API_KEY": Omit()}):
+                client2 = AsyncEntities(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncEntities(
@@ -1549,7 +1531,7 @@ class TestAsyncEntities:
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncEntities
     ) -> None:
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await async_client.memory.drm_instances.with_streaming_response.list().__aenter__()
@@ -1561,7 +1543,7 @@ class TestAsyncEntities:
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncEntities
     ) -> None:
-        respx_mock.get("/memory/drm-instances/").mock(return_value=httpx.Response(500))
+        respx_mock.get("/api/memory/drm-instances/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await async_client.memory.drm_instances.with_streaming_response.list().__aenter__()
@@ -1592,7 +1574,7 @@ class TestAsyncEntities:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=retry_handler)
 
         response = await client.memory.drm_instances.with_raw_response.list()
 
@@ -1617,7 +1599,7 @@ class TestAsyncEntities:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=retry_handler)
 
         response = await client.memory.drm_instances.with_raw_response.list(
             extra_headers={"x-stainless-retry-count": Omit()}
@@ -1643,7 +1625,7 @@ class TestAsyncEntities:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/memory/drm-instances/").mock(side_effect=retry_handler)
+        respx_mock.get("/api/memory/drm-instances/").mock(side_effect=retry_handler)
 
         response = await client.memory.drm_instances.with_raw_response.list(
             extra_headers={"x-stainless-retry-count": "42"}

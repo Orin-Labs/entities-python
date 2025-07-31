@@ -30,11 +30,8 @@ class TestDrmInstances:
     @parametrize
     def test_method_create_with_all_params(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.create(
-            max_daily_summaries_before_weekly=-2147483648,
-            max_weekly_summaries_before_monthly=-2147483648,
             name="name",
             summarizer_model="summarizer_model",
-            summarizer_name_prefix="summarizer_name_prefix",
             timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
@@ -65,7 +62,7 @@ class TestDrmInstances:
     @parametrize
     def test_method_retrieve(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.retrieve(
-            "id",
+            0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -73,7 +70,7 @@ class TestDrmInstances:
     @parametrize
     def test_raw_response_retrieve(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.retrieve(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -85,7 +82,7 @@ class TestDrmInstances:
     @parametrize
     def test_streaming_response_retrieve(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.retrieve(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -97,17 +94,9 @@ class TestDrmInstances:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_retrieve(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.memory.drm_instances.with_raw_response.retrieve(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_update(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.update(
-            id="id",
+            id=0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -115,12 +104,9 @@ class TestDrmInstances:
     @parametrize
     def test_method_update_with_all_params(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.update(
-            id="id",
-            max_daily_summaries_before_weekly=-2147483648,
-            max_weekly_summaries_before_monthly=-2147483648,
+            id=0,
             name="name",
             summarizer_model="summarizer_model",
-            summarizer_name_prefix="summarizer_name_prefix",
             timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
@@ -129,7 +115,7 @@ class TestDrmInstances:
     @parametrize
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.update(
-            id="id",
+            id=0,
         )
 
         assert response.is_closed is True
@@ -141,7 +127,7 @@ class TestDrmInstances:
     @parametrize
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.update(
-            id="id",
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -150,14 +136,6 @@ class TestDrmInstances:
             assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_update(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.memory.drm_instances.with_raw_response.update(
-                id="",
-            )
 
     @pytest.mark.skip()
     @parametrize
@@ -191,7 +169,7 @@ class TestDrmInstances:
     @parametrize
     def test_method_delete(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.delete(
-            "id",
+            0,
         )
         assert drm_instance is None
 
@@ -199,7 +177,7 @@ class TestDrmInstances:
     @parametrize
     def test_raw_response_delete(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.delete(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -211,7 +189,7 @@ class TestDrmInstances:
     @parametrize
     def test_streaming_response_delete(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.delete(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -223,17 +201,9 @@ class TestDrmInstances:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_delete(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.memory.drm_instances.with_raw_response.delete(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_get_memory_context(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.get_memory_context(
-            "id",
+            0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -241,7 +211,7 @@ class TestDrmInstances:
     @parametrize
     def test_raw_response_get_memory_context(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.get_memory_context(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -253,7 +223,7 @@ class TestDrmInstances:
     @parametrize
     def test_streaming_response_get_memory_context(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.get_memory_context(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -265,17 +235,43 @@ class TestDrmInstances:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_get_memory_context(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.memory.drm_instances.with_raw_response.get_memory_context(
-                "",
-            )
+    def test_method_get_messages(self, client: Entities) -> None:
+        drm_instance = client.memory.drm_instances.get_messages(
+            0,
+        )
+        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_get_messages(self, client: Entities) -> None:
+        response = client.memory.drm_instances.with_raw_response.get_messages(
+            0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        drm_instance = response.parse()
+        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_get_messages(self, client: Entities) -> None:
+        with client.memory.drm_instances.with_streaming_response.get_messages(
+            0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            drm_instance = response.parse()
+            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_method_log_messages(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.log_messages(
-            id="id",
+            id=0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -283,12 +279,9 @@ class TestDrmInstances:
     @parametrize
     def test_method_log_messages_with_all_params(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.log_messages(
-            id="id",
-            max_daily_summaries_before_weekly=-2147483648,
-            max_weekly_summaries_before_monthly=-2147483648,
+            id=0,
             name="name",
             summarizer_model="summarizer_model",
-            summarizer_name_prefix="summarizer_name_prefix",
             timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
@@ -297,7 +290,7 @@ class TestDrmInstances:
     @parametrize
     def test_raw_response_log_messages(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.log_messages(
-            id="id",
+            id=0,
         )
 
         assert response.is_closed is True
@@ -309,7 +302,7 @@ class TestDrmInstances:
     @parametrize
     def test_streaming_response_log_messages(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.log_messages(
-            id="id",
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -318,14 +311,6 @@ class TestDrmInstances:
             assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_log_messages(self, client: Entities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.memory.drm_instances.with_raw_response.log_messages(
-                id="",
-            )
 
 
 class TestAsyncDrmInstances:
@@ -343,11 +328,8 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.create(
-            max_daily_summaries_before_weekly=-2147483648,
-            max_weekly_summaries_before_monthly=-2147483648,
             name="name",
             summarizer_model="summarizer_model",
-            summarizer_name_prefix="summarizer_name_prefix",
             timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
@@ -378,7 +360,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.retrieve(
-            "id",
+            0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -386,7 +368,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.retrieve(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -398,7 +380,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.retrieve(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -410,17 +392,9 @@ class TestAsyncDrmInstances:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.memory.drm_instances.with_raw_response.retrieve(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.update(
-            id="id",
+            id=0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -428,12 +402,9 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.update(
-            id="id",
-            max_daily_summaries_before_weekly=-2147483648,
-            max_weekly_summaries_before_monthly=-2147483648,
+            id=0,
             name="name",
             summarizer_model="summarizer_model",
-            summarizer_name_prefix="summarizer_name_prefix",
             timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
@@ -442,7 +413,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.update(
-            id="id",
+            id=0,
         )
 
         assert response.is_closed is True
@@ -454,7 +425,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.update(
-            id="id",
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -463,14 +434,6 @@ class TestAsyncDrmInstances:
             assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_update(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.memory.drm_instances.with_raw_response.update(
-                id="",
-            )
 
     @pytest.mark.skip()
     @parametrize
@@ -504,7 +467,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_method_delete(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.delete(
-            "id",
+            0,
         )
         assert drm_instance is None
 
@@ -512,7 +475,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.delete(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -524,7 +487,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.delete(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -536,17 +499,9 @@ class TestAsyncDrmInstances:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.memory.drm_instances.with_raw_response.delete(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_method_get_memory_context(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.get_memory_context(
-            "id",
+            0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -554,7 +509,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_raw_response_get_memory_context(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.get_memory_context(
-            "id",
+            0,
         )
 
         assert response.is_closed is True
@@ -566,7 +521,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_streaming_response_get_memory_context(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.get_memory_context(
-            "id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -578,17 +533,43 @@ class TestAsyncDrmInstances:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_get_memory_context(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.memory.drm_instances.with_raw_response.get_memory_context(
-                "",
-            )
+    async def test_method_get_messages(self, async_client: AsyncEntities) -> None:
+        drm_instance = await async_client.memory.drm_instances.get_messages(
+            0,
+        )
+        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_get_messages(self, async_client: AsyncEntities) -> None:
+        response = await async_client.memory.drm_instances.with_raw_response.get_messages(
+            0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        drm_instance = await response.parse()
+        assert_matches_type(DrmInstance, drm_instance, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_get_messages(self, async_client: AsyncEntities) -> None:
+        async with async_client.memory.drm_instances.with_streaming_response.get_messages(
+            0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            drm_instance = await response.parse()
+            assert_matches_type(DrmInstance, drm_instance, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_log_messages(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.log_messages(
-            id="id",
+            id=0,
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -596,12 +577,9 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_method_log_messages_with_all_params(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.log_messages(
-            id="id",
-            max_daily_summaries_before_weekly=-2147483648,
-            max_weekly_summaries_before_monthly=-2147483648,
+            id=0,
             name="name",
             summarizer_model="summarizer_model",
-            summarizer_name_prefix="summarizer_name_prefix",
             timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
@@ -610,7 +588,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_raw_response_log_messages(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.log_messages(
-            id="id",
+            id=0,
         )
 
         assert response.is_closed is True
@@ -622,7 +600,7 @@ class TestAsyncDrmInstances:
     @parametrize
     async def test_streaming_response_log_messages(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.log_messages(
-            id="id",
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -631,11 +609,3 @@ class TestAsyncDrmInstances:
             assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_log_messages(self, async_client: AsyncEntities) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.memory.drm_instances.with_raw_response.log_messages(
-                id="",
-            )

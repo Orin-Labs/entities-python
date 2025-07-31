@@ -28,9 +28,12 @@ pip install git+ssh://git@github.com/stainless-sdks/entities-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from entities import Entities
 
-client = Entities()
+client = Entities(
+    api_key=os.environ.get("ENTITIES_API_KEY"),  # This is the default and can be omitted
+)
 
 drm_instances = client.memory.drm_instances.list()
 ```
@@ -45,10 +48,13 @@ so that your API Key is not stored in source control.
 Simply import `AsyncEntities` instead of `Entities` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from entities import AsyncEntities
 
-client = AsyncEntities()
+client = AsyncEntities(
+    api_key=os.environ.get("ENTITIES_API_KEY"),  # This is the default and can be omitted
+)
 
 
 async def main() -> None:
@@ -81,6 +87,7 @@ from entities import AsyncEntities
 
 async def main() -> None:
     async with AsyncEntities(
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         drm_instances = await client.memory.drm_instances.list()

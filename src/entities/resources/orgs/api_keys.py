@@ -65,7 +65,7 @@ class APIKeysResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/orgs/api-keys/",
+            "/api/orgs/api-keys/",
             body=maybe_transform(
                 {
                     "is_active": is_active,
@@ -81,7 +81,7 @@ class APIKeysResource(SyncAPIResource):
 
     def retrieve(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -100,10 +100,8 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/orgs/api-keys/{id}/",
+            f"/api/orgs/api-keys/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -112,7 +110,7 @@ class APIKeysResource(SyncAPIResource):
 
     def update(
         self,
-        id: str,
+        id: int,
         *,
         is_active: bool | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
@@ -133,10 +131,8 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
-            f"/orgs/api-keys/{id}/",
+            f"/api/orgs/api-keys/{id}/",
             body=maybe_transform(
                 {
                     "is_active": is_active,
@@ -161,7 +157,7 @@ class APIKeysResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> APIKeyListResponse:
         return self._get(
-            "/orgs/api-keys/",
+            "/api/orgs/api-keys/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -170,7 +166,7 @@ class APIKeysResource(SyncAPIResource):
 
     def delete(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -189,11 +185,9 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/orgs/api-keys/{id}/",
+            f"/api/orgs/api-keys/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -244,7 +238,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/orgs/api-keys/",
+            "/api/orgs/api-keys/",
             body=await async_maybe_transform(
                 {
                     "is_active": is_active,
@@ -260,7 +254,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -279,10 +273,8 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/orgs/api-keys/{id}/",
+            f"/api/orgs/api-keys/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -291,7 +283,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
     async def update(
         self,
-        id: str,
+        id: int,
         *,
         is_active: bool | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
@@ -312,10 +304,8 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
-            f"/orgs/api-keys/{id}/",
+            f"/api/orgs/api-keys/{id}/",
             body=await async_maybe_transform(
                 {
                     "is_active": is_active,
@@ -340,7 +330,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> APIKeyListResponse:
         return await self._get(
-            "/orgs/api-keys/",
+            "/api/orgs/api-keys/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -349,7 +339,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
     async def delete(
         self,
-        id: str,
+        id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -368,11 +358,9 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/orgs/api-keys/{id}/",
+            f"/api/orgs/api-keys/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

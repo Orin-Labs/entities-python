@@ -15,14 +15,8 @@ class DrmInstance(BaseModel):
 
     updated_at: datetime
 
-    max_daily_summaries_before_weekly: Optional[int] = None
-
-    max_weekly_summaries_before_monthly: Optional[int] = None
-
     name: Optional[str] = None
 
     summarizer_model: Optional[str] = None
-
-    summarizer_name_prefix: Optional[str] = None
 
     timezone: Optional[str] = None

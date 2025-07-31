@@ -8,7 +8,7 @@ __all__ = ["Organization"]
 
 
 class Organization(BaseModel):
-    id: int
+    id: str
 
     created_at: datetime
 
