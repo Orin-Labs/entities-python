@@ -1,0 +1,686 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+import httpx
+
+from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._utils import maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from ..._base_client import make_request_options
+from ...types.memory import drm_instance_create_params, drm_instance_update_params, drm_instance_log_messages_params
+from ...types.memory.drm_instance import DrmInstance
+from ...types.memory.drm_instance_list_response import DrmInstanceListResponse
+
+__all__ = ["DrmInstancesResource", "AsyncDrmInstancesResource"]
+
+
+class DrmInstancesResource(SyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> DrmInstancesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/entities-python#accessing-raw-response-data-eg-headers
+        """
+        return DrmInstancesResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DrmInstancesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/entities-python#with_streaming_response
+        """
+        return DrmInstancesResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        *,
+        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
+        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        summarizer_model: str | NotGiven = NOT_GIVEN,
+        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/memory/drm-instances/",
+            body=maybe_transform(
+                {
+                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
+                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
+                    "name": name,
+                    "summarizer_model": summarizer_model,
+                    "summarizer_name_prefix": summarizer_name_prefix,
+                    "timezone": timezone,
+                },
+                drm_instance_create_params.DrmInstanceCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    def retrieve(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/memory/drm-instances/{id}/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    def update(
+        self,
+        id: str,
+        *,
+        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
+        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        summarizer_model: str | NotGiven = NOT_GIVEN,
+        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._patch(
+            f"/memory/drm-instances/{id}/",
+            body=maybe_transform(
+                {
+                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
+                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
+                    "name": name,
+                    "summarizer_model": summarizer_model,
+                    "summarizer_name_prefix": summarizer_name_prefix,
+                    "timezone": timezone,
+                },
+                drm_instance_update_params.DrmInstanceUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstanceListResponse:
+        return self._get(
+            "/memory/drm-instances/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstanceListResponse,
+        )
+
+    def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            f"/memory/drm-instances/{id}/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def get_memory_context(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Get formatted memory context for this DRM instance.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/memory/drm-instances/{id}/memory_context/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    def log_messages(
+        self,
+        id: str,
+        *,
+        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
+        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        summarizer_model: str | NotGiven = NOT_GIVEN,
+        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Log messages to this DRM instance.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._post(
+            f"/memory/drm-instances/{id}/log_messages/",
+            body=maybe_transform(
+                {
+                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
+                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
+                    "name": name,
+                    "summarizer_model": summarizer_model,
+                    "summarizer_name_prefix": summarizer_name_prefix,
+                    "timezone": timezone,
+                },
+                drm_instance_log_messages_params.DrmInstanceLogMessagesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+
+class AsyncDrmInstancesResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncDrmInstancesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/entities-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncDrmInstancesResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncDrmInstancesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/entities-python#with_streaming_response
+        """
+        return AsyncDrmInstancesResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        *,
+        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
+        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        summarizer_model: str | NotGiven = NOT_GIVEN,
+        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/memory/drm-instances/",
+            body=await async_maybe_transform(
+                {
+                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
+                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
+                    "name": name,
+                    "summarizer_model": summarizer_model,
+                    "summarizer_name_prefix": summarizer_name_prefix,
+                    "timezone": timezone,
+                },
+                drm_instance_create_params.DrmInstanceCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    async def retrieve(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/memory/drm-instances/{id}/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    async def update(
+        self,
+        id: str,
+        *,
+        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
+        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        summarizer_model: str | NotGiven = NOT_GIVEN,
+        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._patch(
+            f"/memory/drm-instances/{id}/",
+            body=await async_maybe_transform(
+                {
+                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
+                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
+                    "name": name,
+                    "summarizer_model": summarizer_model,
+                    "summarizer_name_prefix": summarizer_name_prefix,
+                    "timezone": timezone,
+                },
+                drm_instance_update_params.DrmInstanceUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    async def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstanceListResponse:
+        return await self._get(
+            "/memory/drm-instances/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstanceListResponse,
+        )
+
+    async def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            f"/memory/drm-instances/{id}/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def get_memory_context(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Get formatted memory context for this DRM instance.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/memory/drm-instances/{id}/memory_context/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+    async def log_messages(
+        self,
+        id: str,
+        *,
+        max_daily_summaries_before_weekly: int | NotGiven = NOT_GIVEN,
+        max_weekly_summaries_before_monthly: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        summarizer_model: str | NotGiven = NOT_GIVEN,
+        summarizer_name_prefix: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DrmInstance:
+        """
+        Log messages to this DRM instance.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._post(
+            f"/memory/drm-instances/{id}/log_messages/",
+            body=await async_maybe_transform(
+                {
+                    "max_daily_summaries_before_weekly": max_daily_summaries_before_weekly,
+                    "max_weekly_summaries_before_monthly": max_weekly_summaries_before_monthly,
+                    "name": name,
+                    "summarizer_model": summarizer_model,
+                    "summarizer_name_prefix": summarizer_name_prefix,
+                    "timezone": timezone,
+                },
+                drm_instance_log_messages_params.DrmInstanceLogMessagesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DrmInstance,
+        )
+
+
+class DrmInstancesResourceWithRawResponse:
+    def __init__(self, drm_instances: DrmInstancesResource) -> None:
+        self._drm_instances = drm_instances
+
+        self.create = to_raw_response_wrapper(
+            drm_instances.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            drm_instances.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            drm_instances.update,
+        )
+        self.list = to_raw_response_wrapper(
+            drm_instances.list,
+        )
+        self.delete = to_raw_response_wrapper(
+            drm_instances.delete,
+        )
+        self.get_memory_context = to_raw_response_wrapper(
+            drm_instances.get_memory_context,
+        )
+        self.log_messages = to_raw_response_wrapper(
+            drm_instances.log_messages,
+        )
+
+
+class AsyncDrmInstancesResourceWithRawResponse:
+    def __init__(self, drm_instances: AsyncDrmInstancesResource) -> None:
+        self._drm_instances = drm_instances
+
+        self.create = async_to_raw_response_wrapper(
+            drm_instances.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            drm_instances.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            drm_instances.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            drm_instances.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            drm_instances.delete,
+        )
+        self.get_memory_context = async_to_raw_response_wrapper(
+            drm_instances.get_memory_context,
+        )
+        self.log_messages = async_to_raw_response_wrapper(
+            drm_instances.log_messages,
+        )
+
+
+class DrmInstancesResourceWithStreamingResponse:
+    def __init__(self, drm_instances: DrmInstancesResource) -> None:
+        self._drm_instances = drm_instances
+
+        self.create = to_streamed_response_wrapper(
+            drm_instances.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            drm_instances.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            drm_instances.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            drm_instances.list,
+        )
+        self.delete = to_streamed_response_wrapper(
+            drm_instances.delete,
+        )
+        self.get_memory_context = to_streamed_response_wrapper(
+            drm_instances.get_memory_context,
+        )
+        self.log_messages = to_streamed_response_wrapper(
+            drm_instances.log_messages,
+        )
+
+
+class AsyncDrmInstancesResourceWithStreamingResponse:
+    def __init__(self, drm_instances: AsyncDrmInstancesResource) -> None:
+        self._drm_instances = drm_instances
+
+        self.create = async_to_streamed_response_wrapper(
+            drm_instances.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            drm_instances.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            drm_instances.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            drm_instances.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            drm_instances.delete,
+        )
+        self.get_memory_context = async_to_streamed_response_wrapper(
+            drm_instances.get_memory_context,
+        )
+        self.log_messages = async_to_streamed_response_wrapper(
+            drm_instances.log_messages,
+        )
