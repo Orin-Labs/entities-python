@@ -11,6 +11,14 @@ from .runtimes import (
     AsyncRuntimesResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .identities import (
+    IdentitiesResource,
+    AsyncIdentitiesResource,
+    IdentitiesResourceWithRawResponse,
+    AsyncIdentitiesResourceWithRawResponse,
+    IdentitiesResourceWithStreamingResponse,
+    AsyncIdentitiesResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
 __all__ = ["CloudResource", "AsyncCloudResource"]
@@ -20,6 +28,10 @@ class CloudResource(SyncAPIResource):
     @cached_property
     def runtimes(self) -> RuntimesResource:
         return RuntimesResource(self._client)
+
+    @cached_property
+    def identities(self) -> IdentitiesResource:
+        return IdentitiesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> CloudResourceWithRawResponse:
@@ -45,6 +57,10 @@ class AsyncCloudResource(AsyncAPIResource):
     @cached_property
     def runtimes(self) -> AsyncRuntimesResource:
         return AsyncRuntimesResource(self._client)
+
+    @cached_property
+    def identities(self) -> AsyncIdentitiesResource:
+        return AsyncIdentitiesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncCloudResourceWithRawResponse:
@@ -74,6 +90,10 @@ class CloudResourceWithRawResponse:
     def runtimes(self) -> RuntimesResourceWithRawResponse:
         return RuntimesResourceWithRawResponse(self._cloud.runtimes)
 
+    @cached_property
+    def identities(self) -> IdentitiesResourceWithRawResponse:
+        return IdentitiesResourceWithRawResponse(self._cloud.identities)
+
 
 class AsyncCloudResourceWithRawResponse:
     def __init__(self, cloud: AsyncCloudResource) -> None:
@@ -82,6 +102,10 @@ class AsyncCloudResourceWithRawResponse:
     @cached_property
     def runtimes(self) -> AsyncRuntimesResourceWithRawResponse:
         return AsyncRuntimesResourceWithRawResponse(self._cloud.runtimes)
+
+    @cached_property
+    def identities(self) -> AsyncIdentitiesResourceWithRawResponse:
+        return AsyncIdentitiesResourceWithRawResponse(self._cloud.identities)
 
 
 class CloudResourceWithStreamingResponse:
@@ -92,6 +116,10 @@ class CloudResourceWithStreamingResponse:
     def runtimes(self) -> RuntimesResourceWithStreamingResponse:
         return RuntimesResourceWithStreamingResponse(self._cloud.runtimes)
 
+    @cached_property
+    def identities(self) -> IdentitiesResourceWithStreamingResponse:
+        return IdentitiesResourceWithStreamingResponse(self._cloud.identities)
+
 
 class AsyncCloudResourceWithStreamingResponse:
     def __init__(self, cloud: AsyncCloudResource) -> None:
@@ -100,3 +128,7 @@ class AsyncCloudResourceWithStreamingResponse:
     @cached_property
     def runtimes(self) -> AsyncRuntimesResourceWithStreamingResponse:
         return AsyncRuntimesResourceWithStreamingResponse(self._cloud.runtimes)
+
+    @cached_property
+    def identities(self) -> AsyncIdentitiesResourceWithStreamingResponse:
+        return AsyncIdentitiesResourceWithStreamingResponse(self._cloud.identities)
