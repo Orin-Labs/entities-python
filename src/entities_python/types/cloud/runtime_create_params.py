@@ -2,20 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Iterable
 from typing_extensions import Required, TypedDict
-
-from .identity_param import IdentityParam
-from ..toolbox.tool_param import ToolParam
 
 __all__ = ["RuntimeCreateParams"]
 
 
 class RuntimeCreateParams(TypedDict, total=False):
-    identity: Required[IdentityParam]
+    identity: Required[str]
 
     max_turns: Required[int]
-
-    model: Required[str]
-
-    tools: Required[Iterable[ToolParam]]

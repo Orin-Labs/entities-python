@@ -5,7 +5,6 @@ from __future__ import annotations
 from .runtime import Runtime as Runtime
 from .identity import Identity as Identity
 from .status_enum import StatusEnum as StatusEnum
-from .identity_param import IdentityParam as IdentityParam
 from .runtime_create_params import RuntimeCreateParams as RuntimeCreateParams
 from .runtime_list_response import RuntimeListResponse as RuntimeListResponse
 from .runtime_update_params import RuntimeUpdateParams as RuntimeUpdateParams

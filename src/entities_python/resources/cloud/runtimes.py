@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
@@ -19,8 +17,6 @@ from ..._response import (
 from ...types.cloud import runtime_create_params, runtime_update_params
 from ..._base_client import make_request_options
 from ...types.cloud.runtime import Runtime
-from ...types.toolbox.tool_param import ToolParam
-from ...types.cloud.identity_param import IdentityParam
 from ...types.cloud.runtime_list_response import RuntimeListResponse
 
 __all__ = ["RuntimesResource", "AsyncRuntimesResource"]
@@ -49,10 +45,8 @@ class RuntimesResource(SyncAPIResource):
     def create(
         self,
         *,
-        identity: IdentityParam,
+        identity: str,
         max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -76,8 +70,6 @@ class RuntimesResource(SyncAPIResource):
                 {
                     "identity": identity,
                     "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
                 },
                 runtime_create_params.RuntimeCreateParams,
             ),
@@ -122,10 +114,8 @@ class RuntimesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        identity: IdentityParam,
-        max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
+        identity: str | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,14 +135,12 @@ class RuntimesResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._put(
+        return self._patch(
             f"/api/cloud/runtimes/{id}/",
             body=maybe_transform(
                 {
                     "identity": identity,
                     "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
                 },
                 runtime_update_params.RuntimeUpdateParams,
             ),
@@ -236,10 +224,8 @@ class AsyncRuntimesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        identity: IdentityParam,
+        identity: str,
         max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -263,8 +249,6 @@ class AsyncRuntimesResource(AsyncAPIResource):
                 {
                     "identity": identity,
                     "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
                 },
                 runtime_create_params.RuntimeCreateParams,
             ),
@@ -309,10 +293,8 @@ class AsyncRuntimesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        identity: IdentityParam,
-        max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
+        identity: str | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -332,14 +314,12 @@ class AsyncRuntimesResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._put(
+        return await self._patch(
             f"/api/cloud/runtimes/{id}/",
             body=await async_maybe_transform(
                 {
                     "identity": identity,
                     "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
                 },
                 runtime_update_params.RuntimeUpdateParams,
             ),

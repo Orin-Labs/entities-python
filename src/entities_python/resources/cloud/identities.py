@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from datetime import datetime
 
 import httpx
@@ -49,10 +49,12 @@ class IdentitiesResource(SyncAPIResource):
         self,
         *,
         memory: int,
+        model: str,
         name: str,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -75,10 +77,12 @@ class IdentitiesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "memory": memory,
+                    "model": model,
                     "name": name,
                     "sleep_until": sleep_until,
                     "system_prompt": system_prompt,
                     "timezone": timezone,
+                    "tools": tools,
                 },
                 identity_create_params.IdentityCreateParams,
             ),
@@ -123,11 +127,13 @@ class IdentitiesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        memory: int | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        memory: int,
+        model: str,
+        name: str,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -147,15 +153,17 @@ class IdentitiesResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._patch(
+        return self._put(
             f"/api/cloud/identities/{id}/",
             body=maybe_transform(
                 {
                     "memory": memory,
+                    "model": model,
                     "name": name,
                     "sleep_until": sleep_until,
                     "system_prompt": system_prompt,
                     "timezone": timezone,
+                    "tools": tools,
                 },
                 identity_update_params.IdentityUpdateParams,
             ),
@@ -240,10 +248,12 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         self,
         *,
         memory: int,
+        model: str,
         name: str,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -266,10 +276,12 @@ class AsyncIdentitiesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "memory": memory,
+                    "model": model,
                     "name": name,
                     "sleep_until": sleep_until,
                     "system_prompt": system_prompt,
                     "timezone": timezone,
+                    "tools": tools,
                 },
                 identity_create_params.IdentityCreateParams,
             ),
@@ -314,11 +326,13 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        memory: int | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        memory: int,
+        model: str,
+        name: str,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -338,15 +352,17 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._patch(
+        return await self._put(
             f"/api/cloud/identities/{id}/",
             body=await async_maybe_transform(
                 {
                     "memory": memory,
+                    "model": model,
                     "name": name,
                     "sleep_until": sleep_until,
                     "system_prompt": system_prompt,
                     "timezone": timezone,
+                    "tools": tools,
                 },
                 identity_update_params.IdentityUpdateParams,
             ),
