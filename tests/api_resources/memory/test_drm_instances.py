@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
+from entities import Entities, AsyncEntities
 from tests.utils import assert_matches_type
-from entities_python import Entities, AsyncEntities
-from entities_python._utils import parse_datetime
-from entities_python.types.memory import (
+from entities._utils import parse_datetime
+from entities.types.memory import (
     DrmInstance,
     DrmInstanceListResponse,
     DrmInstanceGetMessagesResponse,
