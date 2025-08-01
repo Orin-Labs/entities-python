@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from entities import Entities, AsyncEntities
 from tests.utils import assert_matches_type
-from entities.types.orgs import (
+from entities_python import Entities, AsyncEntities
+from entities_python.types.orgs import (
     Organization,
     OrganizationListResponse,
 )
