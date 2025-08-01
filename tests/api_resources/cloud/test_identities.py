@@ -35,6 +35,7 @@ class TestIdentities:
             memory=0,
             model="model",
             name="name",
+            locked_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             sleep_until=parse_datetime("2019-12-27T18:11:19.117Z"),
             system_prompt="system_prompt",
             timezone="timezone",
@@ -119,9 +120,6 @@ class TestIdentities:
     def test_method_update(self, client: Entities) -> None:
         identity = client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memory=0,
-            model="model",
-            name="name",
         )
         assert_matches_type(Identity, identity, path=["response"])
 
@@ -130,6 +128,7 @@ class TestIdentities:
     def test_method_update_with_all_params(self, client: Entities) -> None:
         identity = client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            locked_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             memory=0,
             model="model",
             name="name",
@@ -145,9 +144,6 @@ class TestIdentities:
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.cloud.identities.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memory=0,
-            model="model",
-            name="name",
         )
 
         assert response.is_closed is True
@@ -160,9 +156,6 @@ class TestIdentities:
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.cloud.identities.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memory=0,
-            model="model",
-            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -178,9 +171,6 @@ class TestIdentities:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.cloud.identities.with_raw_response.update(
                 id="",
-                memory=0,
-                model="model",
-                name="name",
             )
 
     @pytest.mark.skip()
@@ -276,6 +266,7 @@ class TestAsyncIdentities:
             memory=0,
             model="model",
             name="name",
+            locked_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             sleep_until=parse_datetime("2019-12-27T18:11:19.117Z"),
             system_prompt="system_prompt",
             timezone="timezone",
@@ -360,9 +351,6 @@ class TestAsyncIdentities:
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         identity = await async_client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memory=0,
-            model="model",
-            name="name",
         )
         assert_matches_type(Identity, identity, path=["response"])
 
@@ -371,6 +359,7 @@ class TestAsyncIdentities:
     async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
         identity = await async_client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            locked_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             memory=0,
             model="model",
             name="name",
@@ -386,9 +375,6 @@ class TestAsyncIdentities:
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.cloud.identities.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memory=0,
-            model="model",
-            name="name",
         )
 
         assert response.is_closed is True
@@ -401,9 +387,6 @@ class TestAsyncIdentities:
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.cloud.identities.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            memory=0,
-            model="model",
-            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -419,9 +402,6 @@ class TestAsyncIdentities:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.cloud.identities.with_raw_response.update(
                 id="",
-                memory=0,
-                model="model",
-                name="name",
             )
 
     @pytest.mark.skip()

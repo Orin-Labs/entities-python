@@ -51,6 +51,7 @@ class IdentitiesResource(SyncAPIResource):
         memory: int,
         model: str,
         name: str,
+        locked_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
@@ -79,6 +80,7 @@ class IdentitiesResource(SyncAPIResource):
                     "memory": memory,
                     "model": model,
                     "name": name,
+                    "locked_at": locked_at,
                     "sleep_until": sleep_until,
                     "system_prompt": system_prompt,
                     "timezone": timezone,
@@ -127,9 +129,10 @@ class IdentitiesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        memory: int,
-        model: str,
-        name: str,
+        locked_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        memory: int | NotGiven = NOT_GIVEN,
+        model: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
@@ -153,10 +156,11 @@ class IdentitiesResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._put(
+        return self._patch(
             f"/api/cloud/identities/{id}/",
             body=maybe_transform(
                 {
+                    "locked_at": locked_at,
                     "memory": memory,
                     "model": model,
                     "name": name,
@@ -250,6 +254,7 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         memory: int,
         model: str,
         name: str,
+        locked_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
@@ -278,6 +283,7 @@ class AsyncIdentitiesResource(AsyncAPIResource):
                     "memory": memory,
                     "model": model,
                     "name": name,
+                    "locked_at": locked_at,
                     "sleep_until": sleep_until,
                     "system_prompt": system_prompt,
                     "timezone": timezone,
@@ -326,9 +332,10 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        memory: int,
-        model: str,
-        name: str,
+        locked_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        memory: int | NotGiven = NOT_GIVEN,
+        model: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         system_prompt: str | NotGiven = NOT_GIVEN,
         timezone: str | NotGiven = NOT_GIVEN,
@@ -352,10 +359,11 @@ class AsyncIdentitiesResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._put(
+        return await self._patch(
             f"/api/cloud/identities/{id}/",
             body=await async_maybe_transform(
                 {
+                    "locked_at": locked_at,
                     "memory": memory,
                     "model": model,
                     "name": name,
