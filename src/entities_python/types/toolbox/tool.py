@@ -14,10 +14,10 @@ class Tool(BaseModel):
 
     name: str
 
-    parameters: object
+    organization: str
 
     url: str
 
     adapter: Optional[str] = None
 
-    organization: Optional[str] = None
+    parameters: Optional[object] = None

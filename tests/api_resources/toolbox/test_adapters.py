@@ -28,16 +28,6 @@ class TestAdapters:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create_with_all_params(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.create(
-            description="description",
-            name="name",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(Adapter, adapter, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
     def test_raw_response_create(self, client: Entities) -> None:
         response = client.toolbox.adapters.with_raw_response.create(
             description="description",
@@ -121,7 +111,6 @@ class TestAdapters:
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 
@@ -246,16 +235,6 @@ class TestAsyncAdapters:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.create(
-            description="description",
-            name="name",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(Adapter, adapter, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.adapters.with_raw_response.create(
             description="description",
@@ -339,7 +318,6 @@ class TestAsyncAdapters:
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 

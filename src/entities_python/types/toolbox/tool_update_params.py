@@ -15,8 +15,6 @@ class ToolUpdateParams(TypedDict, total=False):
 
     name: str
 
-    organization: Optional[str]
-
     parameters: object
 
     url: str

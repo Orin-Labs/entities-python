@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["AdapterCreateParams"]
@@ -12,5 +11,3 @@ class AdapterCreateParams(TypedDict, total=False):
     description: Required[str]
 
     name: Required[str]
-
-    organization: Optional[str]

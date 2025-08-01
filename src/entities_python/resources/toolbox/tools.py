@@ -49,10 +49,9 @@ class ToolsResource(SyncAPIResource):
         *,
         description: str,
         name: str,
-        parameters: object,
         url: str,
         adapter: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
+        parameters: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -76,10 +75,9 @@ class ToolsResource(SyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "parameters": parameters,
                     "url": url,
                     "adapter": adapter,
-                    "organization": organization,
+                    "parameters": parameters,
                 },
                 tool_create_params.ToolCreateParams,
             ),
@@ -127,7 +125,6 @@ class ToolsResource(SyncAPIResource):
         adapter: Optional[str] | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: object | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -156,7 +153,6 @@ class ToolsResource(SyncAPIResource):
                     "adapter": adapter,
                     "description": description,
                     "name": name,
-                    "organization": organization,
                     "parameters": parameters,
                     "url": url,
                 },
@@ -244,10 +240,9 @@ class AsyncToolsResource(AsyncAPIResource):
         *,
         description: str,
         name: str,
-        parameters: object,
         url: str,
         adapter: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
+        parameters: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -271,10 +266,9 @@ class AsyncToolsResource(AsyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "parameters": parameters,
                     "url": url,
                     "adapter": adapter,
-                    "organization": organization,
+                    "parameters": parameters,
                 },
                 tool_create_params.ToolCreateParams,
             ),
@@ -322,7 +316,6 @@ class AsyncToolsResource(AsyncAPIResource):
         adapter: Optional[str] | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
         parameters: object | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -351,7 +344,6 @@ class AsyncToolsResource(AsyncAPIResource):
                     "adapter": adapter,
                     "description": description,
                     "name": name,
-                    "organization": organization,
                     "parameters": parameters,
                     "url": url,
                 },
