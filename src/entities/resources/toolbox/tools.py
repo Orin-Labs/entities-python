@@ -16,10 +16,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.tools import tool_create_params, tool_update_params
 from ..._base_client import make_request_options
-from ...types.tools.tool import Tool
-from ...types.tools.tool_list_response import ToolListResponse
+from ...types.toolbox import tool_create_params, tool_update_params
+from ...types.toolbox.tool import Tool
+from ...types.toolbox.tool_list_response import ToolListResponse
 
 __all__ = ["ToolsResource", "AsyncToolsResource"]
 
@@ -71,7 +71,7 @@ class ToolsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/tools/tools/",
+            "/api/toolbox/tools/",
             body=maybe_transform(
                 {
                     "description": description,
@@ -113,7 +113,7 @@ class ToolsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/tools/tools/{id}/",
+            f"/api/toolbox/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -150,7 +150,7 @@ class ToolsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
-            f"/api/tools/tools/{id}/",
+            f"/api/toolbox/tools/{id}/",
             body=maybe_transform(
                 {
                     "adapter": adapter,
@@ -179,7 +179,7 @@ class ToolsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ToolListResponse:
         return self._get(
-            "/api/tools/tools/",
+            "/api/toolbox/tools/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -211,7 +211,7 @@ class ToolsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/tools/tools/{id}/",
+            f"/api/toolbox/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -266,7 +266,7 @@ class AsyncToolsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/tools/tools/",
+            "/api/toolbox/tools/",
             body=await async_maybe_transform(
                 {
                     "description": description,
@@ -308,7 +308,7 @@ class AsyncToolsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/tools/tools/{id}/",
+            f"/api/toolbox/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -345,7 +345,7 @@ class AsyncToolsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
-            f"/api/tools/tools/{id}/",
+            f"/api/toolbox/tools/{id}/",
             body=await async_maybe_transform(
                 {
                     "adapter": adapter,
@@ -374,7 +374,7 @@ class AsyncToolsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ToolListResponse:
         return await self._get(
-            "/api/tools/tools/",
+            "/api/toolbox/tools/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -406,7 +406,7 @@ class AsyncToolsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/tools/tools/{id}/",
+            f"/api/toolbox/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
