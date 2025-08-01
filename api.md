@@ -59,36 +59,36 @@ Methods:
 - <code title="get /api/orgs/organizations/">client.orgs.organizations.<a href="./src/entities/resources/orgs/organizations.py">list</a>() -> <a href="./src/entities/types/orgs/organization_list_response.py">OrganizationListResponse</a></code>
 - <code title="delete /api/orgs/organizations/{id}/">client.orgs.organizations.<a href="./src/entities/resources/orgs/organizations.py">delete</a>(id) -> None</code>
 
-# Tools
+# Toolbox
 
 ## Adapters
 
 Types:
 
 ```python
-from entities.types.tools import Adapter, AdapterListResponse
+from entities.types.toolbox import Adapter, AdapterListResponse
 ```
 
 Methods:
 
-- <code title="post /api/tools/adapters/">client.tools.adapters.<a href="./src/entities/resources/tools/adapters.py">create</a>(\*\*<a href="src/entities/types/tools/adapter_create_params.py">params</a>) -> <a href="./src/entities/types/tools/adapter.py">Adapter</a></code>
-- <code title="get /api/tools/adapters/{id}/">client.tools.adapters.<a href="./src/entities/resources/tools/adapters.py">retrieve</a>(id) -> <a href="./src/entities/types/tools/adapter.py">Adapter</a></code>
-- <code title="patch /api/tools/adapters/{id}/">client.tools.adapters.<a href="./src/entities/resources/tools/adapters.py">update</a>(id, \*\*<a href="src/entities/types/tools/adapter_update_params.py">params</a>) -> <a href="./src/entities/types/tools/adapter.py">Adapter</a></code>
-- <code title="get /api/tools/adapters/">client.tools.adapters.<a href="./src/entities/resources/tools/adapters.py">list</a>() -> <a href="./src/entities/types/tools/adapter_list_response.py">AdapterListResponse</a></code>
-- <code title="delete /api/tools/adapters/{id}/">client.tools.adapters.<a href="./src/entities/resources/tools/adapters.py">delete</a>(id) -> None</code>
+- <code title="post /api/toolbox/adapters/">client.toolbox.adapters.<a href="./src/entities/resources/toolbox/adapters.py">create</a>(\*\*<a href="src/entities/types/toolbox/adapter_create_params.py">params</a>) -> <a href="./src/entities/types/toolbox/adapter.py">Adapter</a></code>
+- <code title="get /api/toolbox/adapters/{id}/">client.toolbox.adapters.<a href="./src/entities/resources/toolbox/adapters.py">retrieve</a>(id) -> <a href="./src/entities/types/toolbox/adapter.py">Adapter</a></code>
+- <code title="patch /api/toolbox/adapters/{id}/">client.toolbox.adapters.<a href="./src/entities/resources/toolbox/adapters.py">update</a>(id, \*\*<a href="src/entities/types/toolbox/adapter_update_params.py">params</a>) -> <a href="./src/entities/types/toolbox/adapter.py">Adapter</a></code>
+- <code title="get /api/toolbox/adapters/">client.toolbox.adapters.<a href="./src/entities/resources/toolbox/adapters.py">list</a>() -> <a href="./src/entities/types/toolbox/adapter_list_response.py">AdapterListResponse</a></code>
+- <code title="delete /api/toolbox/adapters/{id}/">client.toolbox.adapters.<a href="./src/entities/resources/toolbox/adapters.py">delete</a>(id) -> None</code>
 
 ## Tools
 
 Types:
 
 ```python
-from entities.types.tools import Tool, ToolListResponse
+from entities.types.toolbox import Tool, ToolListResponse
 ```
 
 Methods:
 
-- <code title="post /api/tools/tools/">client.tools.tools.<a href="./src/entities/resources/tools/tools_.py">create</a>(\*\*<a href="src/entities/types/tools/tool_create_params.py">params</a>) -> <a href="./src/entities/types/tools/tool.py">Tool</a></code>
-- <code title="get /api/tools/tools/{id}/">client.tools.tools.<a href="./src/entities/resources/tools/tools_.py">retrieve</a>(id) -> <a href="./src/entities/types/tools/tool.py">Tool</a></code>
-- <code title="patch /api/tools/tools/{id}/">client.tools.tools.<a href="./src/entities/resources/tools/tools_.py">update</a>(id, \*\*<a href="src/entities/types/tools/tool_update_params.py">params</a>) -> <a href="./src/entities/types/tools/tool.py">Tool</a></code>
-- <code title="get /api/tools/tools/">client.tools.tools.<a href="./src/entities/resources/tools/tools_.py">list</a>() -> <a href="./src/entities/types/tools/tool_list_response.py">ToolListResponse</a></code>
-- <code title="delete /api/tools/tools/{id}/">client.tools.tools.<a href="./src/entities/resources/tools/tools_.py">delete</a>(id) -> None</code>
+- <code title="post /api/toolbox/tools/">client.toolbox.tools.<a href="./src/entities/resources/toolbox/tools.py">create</a>(\*\*<a href="src/entities/types/toolbox/tool_create_params.py">params</a>) -> <a href="./src/entities/types/toolbox/tool.py">Tool</a></code>
+- <code title="get /api/toolbox/tools/{id}/">client.toolbox.tools.<a href="./src/entities/resources/toolbox/tools.py">retrieve</a>(id) -> <a href="./src/entities/types/toolbox/tool.py">Tool</a></code>
+- <code title="patch /api/toolbox/tools/{id}/">client.toolbox.tools.<a href="./src/entities/resources/toolbox/tools.py">update</a>(id, \*\*<a href="src/entities/types/toolbox/tool_update_params.py">params</a>) -> <a href="./src/entities/types/toolbox/tool.py">Tool</a></code>
+- <code title="get /api/toolbox/tools/">client.toolbox.tools.<a href="./src/entities/resources/toolbox/tools.py">list</a>() -> <a href="./src/entities/types/toolbox/tool_list_response.py">ToolListResponse</a></code>
+- <code title="delete /api/toolbox/tools/{id}/">client.toolbox.tools.<a href="./src/entities/resources/toolbox/tools.py">delete</a>(id) -> None</code>

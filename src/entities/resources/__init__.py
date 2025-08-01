@@ -8,14 +8,6 @@ from .orgs import (
     OrgsResourceWithStreamingResponse,
     AsyncOrgsResourceWithStreamingResponse,
 )
-from .tools import (
-    ToolsResource,
-    AsyncToolsResource,
-    ToolsResourceWithRawResponse,
-    AsyncToolsResourceWithRawResponse,
-    ToolsResourceWithStreamingResponse,
-    AsyncToolsResourceWithStreamingResponse,
-)
 from .memory import (
     MemoryResource,
     AsyncMemoryResource,
@@ -23,6 +15,14 @@ from .memory import (
     AsyncMemoryResourceWithRawResponse,
     MemoryResourceWithStreamingResponse,
     AsyncMemoryResourceWithStreamingResponse,
+)
+from .toolbox import (
+    ToolboxResource,
+    AsyncToolboxResource,
+    ToolboxResourceWithRawResponse,
+    AsyncToolboxResourceWithRawResponse,
+    ToolboxResourceWithStreamingResponse,
+    AsyncToolboxResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -38,10 +38,10 @@ __all__ = [
     "AsyncOrgsResourceWithRawResponse",
     "OrgsResourceWithStreamingResponse",
     "AsyncOrgsResourceWithStreamingResponse",
-    "ToolsResource",
-    "AsyncToolsResource",
-    "ToolsResourceWithRawResponse",
-    "AsyncToolsResourceWithRawResponse",
-    "ToolsResourceWithStreamingResponse",
-    "AsyncToolsResourceWithStreamingResponse",
+    "ToolboxResource",
+    "AsyncToolboxResource",
+    "ToolboxResourceWithRawResponse",
+    "AsyncToolboxResourceWithRawResponse",
+    "ToolboxResourceWithStreamingResponse",
+    "AsyncToolboxResourceWithStreamingResponse",
 ]

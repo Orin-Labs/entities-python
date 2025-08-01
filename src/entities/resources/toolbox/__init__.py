@@ -8,6 +8,14 @@ from .tools import (
     ToolsResourceWithStreamingResponse,
     AsyncToolsResourceWithStreamingResponse,
 )
+from .toolbox import (
+    ToolboxResource,
+    AsyncToolboxResource,
+    ToolboxResourceWithRawResponse,
+    AsyncToolboxResourceWithRawResponse,
+    ToolboxResourceWithStreamingResponse,
+    AsyncToolboxResourceWithStreamingResponse,
+)
 from .adapters import (
     AdaptersResource,
     AsyncAdaptersResource,
@@ -30,4 +38,10 @@ __all__ = [
     "AsyncToolsResourceWithRawResponse",
     "ToolsResourceWithStreamingResponse",
     "AsyncToolsResourceWithStreamingResponse",
+    "ToolboxResource",
+    "AsyncToolboxResource",
+    "ToolboxResourceWithRawResponse",
+    "AsyncToolboxResourceWithRawResponse",
+    "ToolboxResourceWithStreamingResponse",
+    "AsyncToolboxResourceWithStreamingResponse",
 ]
