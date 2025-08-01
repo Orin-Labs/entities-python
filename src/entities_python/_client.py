@@ -90,7 +90,7 @@ class Entities(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ENTITIES_BASE_URL")
         if base_url is None:
-            base_url = f"entities-api.onrender.com"
+            base_url = f"https://entities-api.onrender.com"
 
         super().__init__(
             version=__version__,
@@ -260,7 +260,7 @@ class AsyncEntities(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ENTITIES_BASE_URL")
         if base_url is None:
-            base_url = f"entities-api.onrender.com"
+            base_url = f"https://entities-api.onrender.com"
 
         super().__init__(
             version=__version__,
