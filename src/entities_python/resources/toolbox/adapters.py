@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
@@ -49,7 +47,6 @@ class AdaptersResource(SyncAPIResource):
         *,
         description: str,
         name: str,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -73,7 +70,6 @@ class AdaptersResource(SyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "organization": organization,
                 },
                 adapter_create_params.AdapterCreateParams,
             ),
@@ -120,7 +116,6 @@ class AdaptersResource(SyncAPIResource):
         *,
         description: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -146,7 +141,6 @@ class AdaptersResource(SyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "organization": organization,
                 },
                 adapter_update_params.AdapterUpdateParams,
             ),
@@ -232,7 +226,6 @@ class AsyncAdaptersResource(AsyncAPIResource):
         *,
         description: str,
         name: str,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -256,7 +249,6 @@ class AsyncAdaptersResource(AsyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "organization": organization,
                 },
                 adapter_create_params.AdapterCreateParams,
             ),
@@ -303,7 +295,6 @@ class AsyncAdaptersResource(AsyncAPIResource):
         *,
         description: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -329,7 +320,6 @@ class AsyncAdaptersResource(AsyncAPIResource):
                 {
                     "description": description,
                     "name": name,
-                    "organization": organization,
                 },
                 adapter_update_params.AdapterUpdateParams,
             ),

@@ -23,7 +23,6 @@ class TestTools:
         tool = client.toolbox.tools.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
         )
         assert_matches_type(Tool, tool, path=["response"])
@@ -34,10 +33,9 @@ class TestTools:
         tool = client.toolbox.tools.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
 
@@ -47,7 +45,6 @@ class TestTools:
         response = client.toolbox.tools.with_raw_response.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
         )
 
@@ -62,7 +59,6 @@ class TestTools:
         with client.toolbox.tools.with_streaming_response.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
         ) as response:
             assert not response.is_closed
@@ -131,7 +127,6 @@ class TestTools:
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             parameters={},
             url="https://example.com",
         )
@@ -253,7 +248,6 @@ class TestAsyncTools:
         tool = await async_client.toolbox.tools.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
         )
         assert_matches_type(Tool, tool, path=["response"])
@@ -264,10 +258,9 @@ class TestAsyncTools:
         tool = await async_client.toolbox.tools.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
 
@@ -277,7 +270,6 @@ class TestAsyncTools:
         response = await async_client.toolbox.tools.with_raw_response.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
         )
 
@@ -292,7 +284,6 @@ class TestAsyncTools:
         async with async_client.toolbox.tools.with_streaming_response.create(
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
         ) as response:
             assert not response.is_closed
@@ -361,7 +352,6 @@ class TestAsyncTools:
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            organization="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             parameters={},
             url="https://example.com",
         )
