@@ -18,6 +18,8 @@ class IdentityCreateParams(TypedDict, total=False):
 
     name: Required[str]
 
+    locked_at: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+
     sleep_until: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
 
     system_prompt: str

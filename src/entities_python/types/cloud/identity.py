@@ -21,6 +21,8 @@ class Identity(BaseModel):
 
     organization: str
 
+    locked_at: Optional[datetime] = None
+
     sleep_until: Optional[datetime] = None
 
     system_prompt: Optional[str] = None
