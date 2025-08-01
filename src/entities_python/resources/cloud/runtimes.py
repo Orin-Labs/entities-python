@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import List
+from typing_extensions import Literal
+
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
@@ -14,47 +17,60 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.orgs import organization_create_params, organization_update_params
+from ...types.cloud import runtime_create_params, runtime_update_params
 from ..._base_client import make_request_options
-from ...types.orgs.organization import Organization
-from ...types.orgs.organization_list_response import OrganizationListResponse
+from ...types.cloud.runtime_list_response import RuntimeListResponse
+from ...types.cloud.runtime_create_response import RuntimeCreateResponse
+from ...types.cloud.runtime_update_response import RuntimeUpdateResponse
+from ...types.cloud.runtime_retrieve_response import RuntimeRetrieveResponse
 
-__all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
+__all__ = ["RuntimesResource", "AsyncRuntimesResource"]
 
 
-class OrganizationsResource(SyncAPIResource):
+class RuntimesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> OrganizationsResourceWithRawResponse:
+    def with_raw_response(self) -> RuntimesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#accessing-raw-response-data-eg-headers
         """
-        return OrganizationsResourceWithRawResponse(self)
+        return RuntimesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OrganizationsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> RuntimesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#with_streaming_response
         """
-        return OrganizationsResourceWithStreamingResponse(self)
+        return RuntimesResourceWithStreamingResponse(self)
 
     def create(
         self,
         *,
-        name: str,
+        agent_key: str,
+        current_turn: int,
+        max_turns: int,
+        memory: int,
+        model: str,
+        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Organization:
+    ) -> RuntimeCreateResponse:
         """
         Args:
+          status: - `pending` - Pending
+              - `running` - Running
+              - `completed` - Completed
+              - `failed` - Failed
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -64,17 +80,28 @@ class OrganizationsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/orgs/organizations/",
-            body=maybe_transform({"name": name}, organization_create_params.OrganizationCreateParams),
+            "/api/cloud/runtimes/",
+            body=maybe_transform(
+                {
+                    "agent_key": agent_key,
+                    "current_turn": current_turn,
+                    "max_turns": max_turns,
+                    "memory": memory,
+                    "model": model,
+                    "status": status,
+                    "tools": tools,
+                },
+                runtime_create_params.RuntimeCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Organization,
+            cast_to=RuntimeCreateResponse,
         )
 
     def retrieve(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -82,7 +109,7 @@ class OrganizationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Organization:
+    ) -> RuntimeRetrieveResponse:
         """
         Args:
           extra_headers: Send extra headers
@@ -93,28 +120,41 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/orgs/organizations/{id}/",
+            f"/api/cloud/runtimes/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Organization,
+            cast_to=RuntimeRetrieveResponse,
         )
 
     def update(
         self,
-        id: int,
+        id: str,
         *,
-        name: str,
+        agent_key: str | NotGiven = NOT_GIVEN,
+        current_turn: int | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
+        memory: int | NotGiven = NOT_GIVEN,
+        model: str | NotGiven = NOT_GIVEN,
+        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Organization:
+    ) -> RuntimeUpdateResponse:
         """
         Args:
+          status: - `pending` - Pending
+              - `running` - Running
+              - `completed` - Completed
+              - `failed` - Failed
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -123,13 +163,26 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._put(
-            f"/api/orgs/organizations/{id}/",
-            body=maybe_transform({"name": name}, organization_update_params.OrganizationUpdateParams),
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._patch(
+            f"/api/cloud/runtimes/{id}/",
+            body=maybe_transform(
+                {
+                    "agent_key": agent_key,
+                    "current_turn": current_turn,
+                    "max_turns": max_turns,
+                    "memory": memory,
+                    "model": model,
+                    "status": status,
+                    "tools": tools,
+                },
+                runtime_update_params.RuntimeUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Organization,
+            cast_to=RuntimeUpdateResponse,
         )
 
     def list(
@@ -141,18 +194,18 @@ class OrganizationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationListResponse:
+    ) -> RuntimeListResponse:
         return self._get(
-            "/api/orgs/organizations/",
+            "/api/cloud/runtimes/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrganizationListResponse,
+            cast_to=RuntimeListResponse,
         )
 
     def delete(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -171,9 +224,11 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/orgs/organizations/{id}/",
+            f"/api/cloud/runtimes/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -181,39 +236,50 @@ class OrganizationsResource(SyncAPIResource):
         )
 
 
-class AsyncOrganizationsResource(AsyncAPIResource):
+class AsyncRuntimesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncOrganizationsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncRuntimesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncOrganizationsResourceWithRawResponse(self)
+        return AsyncRuntimesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOrganizationsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncRuntimesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#with_streaming_response
         """
-        return AsyncOrganizationsResourceWithStreamingResponse(self)
+        return AsyncRuntimesResourceWithStreamingResponse(self)
 
     async def create(
         self,
         *,
-        name: str,
+        agent_key: str,
+        current_turn: int,
+        max_turns: int,
+        memory: int,
+        model: str,
+        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Organization:
+    ) -> RuntimeCreateResponse:
         """
         Args:
+          status: - `pending` - Pending
+              - `running` - Running
+              - `completed` - Completed
+              - `failed` - Failed
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -223,17 +289,28 @@ class AsyncOrganizationsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/orgs/organizations/",
-            body=await async_maybe_transform({"name": name}, organization_create_params.OrganizationCreateParams),
+            "/api/cloud/runtimes/",
+            body=await async_maybe_transform(
+                {
+                    "agent_key": agent_key,
+                    "current_turn": current_turn,
+                    "max_turns": max_turns,
+                    "memory": memory,
+                    "model": model,
+                    "status": status,
+                    "tools": tools,
+                },
+                runtime_create_params.RuntimeCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Organization,
+            cast_to=RuntimeCreateResponse,
         )
 
     async def retrieve(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -241,7 +318,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Organization:
+    ) -> RuntimeRetrieveResponse:
         """
         Args:
           extra_headers: Send extra headers
@@ -252,28 +329,41 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/orgs/organizations/{id}/",
+            f"/api/cloud/runtimes/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Organization,
+            cast_to=RuntimeRetrieveResponse,
         )
 
     async def update(
         self,
-        id: int,
+        id: str,
         *,
-        name: str,
+        agent_key: str | NotGiven = NOT_GIVEN,
+        current_turn: int | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
+        memory: int | NotGiven = NOT_GIVEN,
+        model: str | NotGiven = NOT_GIVEN,
+        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
+        tools: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Organization:
+    ) -> RuntimeUpdateResponse:
         """
         Args:
+          status: - `pending` - Pending
+              - `running` - Running
+              - `completed` - Completed
+              - `failed` - Failed
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -282,13 +372,26 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._put(
-            f"/api/orgs/organizations/{id}/",
-            body=await async_maybe_transform({"name": name}, organization_update_params.OrganizationUpdateParams),
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._patch(
+            f"/api/cloud/runtimes/{id}/",
+            body=await async_maybe_transform(
+                {
+                    "agent_key": agent_key,
+                    "current_turn": current_turn,
+                    "max_turns": max_turns,
+                    "memory": memory,
+                    "model": model,
+                    "status": status,
+                    "tools": tools,
+                },
+                runtime_update_params.RuntimeUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Organization,
+            cast_to=RuntimeUpdateResponse,
         )
 
     async def list(
@@ -300,18 +403,18 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationListResponse:
+    ) -> RuntimeListResponse:
         return await self._get(
-            "/api/orgs/organizations/",
+            "/api/cloud/runtimes/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrganizationListResponse,
+            cast_to=RuntimeListResponse,
         )
 
     async def delete(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -330,9 +433,11 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/orgs/organizations/{id}/",
+            f"/api/cloud/runtimes/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -340,85 +445,85 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         )
 
 
-class OrganizationsResourceWithRawResponse:
-    def __init__(self, organizations: OrganizationsResource) -> None:
-        self._organizations = organizations
+class RuntimesResourceWithRawResponse:
+    def __init__(self, runtimes: RuntimesResource) -> None:
+        self._runtimes = runtimes
 
         self.create = to_raw_response_wrapper(
-            organizations.create,
+            runtimes.create,
         )
         self.retrieve = to_raw_response_wrapper(
-            organizations.retrieve,
+            runtimes.retrieve,
         )
         self.update = to_raw_response_wrapper(
-            organizations.update,
+            runtimes.update,
         )
         self.list = to_raw_response_wrapper(
-            organizations.list,
+            runtimes.list,
         )
         self.delete = to_raw_response_wrapper(
-            organizations.delete,
+            runtimes.delete,
         )
 
 
-class AsyncOrganizationsResourceWithRawResponse:
-    def __init__(self, organizations: AsyncOrganizationsResource) -> None:
-        self._organizations = organizations
+class AsyncRuntimesResourceWithRawResponse:
+    def __init__(self, runtimes: AsyncRuntimesResource) -> None:
+        self._runtimes = runtimes
 
         self.create = async_to_raw_response_wrapper(
-            organizations.create,
+            runtimes.create,
         )
         self.retrieve = async_to_raw_response_wrapper(
-            organizations.retrieve,
+            runtimes.retrieve,
         )
         self.update = async_to_raw_response_wrapper(
-            organizations.update,
+            runtimes.update,
         )
         self.list = async_to_raw_response_wrapper(
-            organizations.list,
+            runtimes.list,
         )
         self.delete = async_to_raw_response_wrapper(
-            organizations.delete,
+            runtimes.delete,
         )
 
 
-class OrganizationsResourceWithStreamingResponse:
-    def __init__(self, organizations: OrganizationsResource) -> None:
-        self._organizations = organizations
+class RuntimesResourceWithStreamingResponse:
+    def __init__(self, runtimes: RuntimesResource) -> None:
+        self._runtimes = runtimes
 
         self.create = to_streamed_response_wrapper(
-            organizations.create,
+            runtimes.create,
         )
         self.retrieve = to_streamed_response_wrapper(
-            organizations.retrieve,
+            runtimes.retrieve,
         )
         self.update = to_streamed_response_wrapper(
-            organizations.update,
+            runtimes.update,
         )
         self.list = to_streamed_response_wrapper(
-            organizations.list,
+            runtimes.list,
         )
         self.delete = to_streamed_response_wrapper(
-            organizations.delete,
+            runtimes.delete,
         )
 
 
-class AsyncOrganizationsResourceWithStreamingResponse:
-    def __init__(self, organizations: AsyncOrganizationsResource) -> None:
-        self._organizations = organizations
+class AsyncRuntimesResourceWithStreamingResponse:
+    def __init__(self, runtimes: AsyncRuntimesResource) -> None:
+        self._runtimes = runtimes
 
         self.create = async_to_streamed_response_wrapper(
-            organizations.create,
+            runtimes.create,
         )
         self.retrieve = async_to_streamed_response_wrapper(
-            organizations.retrieve,
+            runtimes.retrieve,
         )
         self.update = async_to_streamed_response_wrapper(
-            organizations.update,
+            runtimes.update,
         )
         self.list = async_to_streamed_response_wrapper(
-            organizations.list,
+            runtimes.list,
         )
         self.delete = async_to_streamed_response_wrapper(
-            organizations.delete,
+            runtimes.delete,
         )

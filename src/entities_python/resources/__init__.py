@@ -8,6 +8,14 @@ from .orgs import (
     OrgsResourceWithStreamingResponse,
     AsyncOrgsResourceWithStreamingResponse,
 )
+from .cloud import (
+    CloudResource,
+    AsyncCloudResource,
+    CloudResourceWithRawResponse,
+    AsyncCloudResourceWithRawResponse,
+    CloudResourceWithStreamingResponse,
+    AsyncCloudResourceWithStreamingResponse,
+)
 from .memory import (
     MemoryResource,
     AsyncMemoryResource,
@@ -44,4 +52,10 @@ __all__ = [
     "AsyncToolboxResourceWithRawResponse",
     "ToolboxResourceWithStreamingResponse",
     "AsyncToolboxResourceWithStreamingResponse",
+    "CloudResource",
+    "AsyncCloudResource",
+    "CloudResourceWithRawResponse",
+    "AsyncCloudResourceWithRawResponse",
+    "CloudResourceWithStreamingResponse",
+    "AsyncCloudResourceWithStreamingResponse",
 ]

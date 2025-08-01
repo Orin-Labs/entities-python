@@ -29,6 +29,7 @@ from ._base_client import (
     AsyncAPIClient,
 )
 from .resources.orgs import orgs
+from .resources.cloud import cloud
 from .resources.memory import memory
 from .resources.toolbox import toolbox
 
@@ -48,6 +49,7 @@ class Entities(SyncAPIClient):
     memory: memory.MemoryResource
     orgs: orgs.OrgsResource
     toolbox: toolbox.ToolboxResource
+    cloud: cloud.CloudResource
     with_raw_response: EntitiesWithRawResponse
     with_streaming_response: EntitiesWithStreamedResponse
 
@@ -108,6 +110,7 @@ class Entities(SyncAPIClient):
         self.memory = memory.MemoryResource(self)
         self.orgs = orgs.OrgsResource(self)
         self.toolbox = toolbox.ToolboxResource(self)
+        self.cloud = cloud.CloudResource(self)
         self.with_raw_response = EntitiesWithRawResponse(self)
         self.with_streaming_response = EntitiesWithStreamedResponse(self)
 
@@ -220,6 +223,7 @@ class AsyncEntities(AsyncAPIClient):
     memory: memory.AsyncMemoryResource
     orgs: orgs.AsyncOrgsResource
     toolbox: toolbox.AsyncToolboxResource
+    cloud: cloud.AsyncCloudResource
     with_raw_response: AsyncEntitiesWithRawResponse
     with_streaming_response: AsyncEntitiesWithStreamedResponse
 
@@ -280,6 +284,7 @@ class AsyncEntities(AsyncAPIClient):
         self.memory = memory.AsyncMemoryResource(self)
         self.orgs = orgs.AsyncOrgsResource(self)
         self.toolbox = toolbox.AsyncToolboxResource(self)
+        self.cloud = cloud.AsyncCloudResource(self)
         self.with_raw_response = AsyncEntitiesWithRawResponse(self)
         self.with_streaming_response = AsyncEntitiesWithStreamedResponse(self)
 
@@ -393,6 +398,7 @@ class EntitiesWithRawResponse:
         self.memory = memory.MemoryResourceWithRawResponse(client.memory)
         self.orgs = orgs.OrgsResourceWithRawResponse(client.orgs)
         self.toolbox = toolbox.ToolboxResourceWithRawResponse(client.toolbox)
+        self.cloud = cloud.CloudResourceWithRawResponse(client.cloud)
 
 
 class AsyncEntitiesWithRawResponse:
@@ -400,6 +406,7 @@ class AsyncEntitiesWithRawResponse:
         self.memory = memory.AsyncMemoryResourceWithRawResponse(client.memory)
         self.orgs = orgs.AsyncOrgsResourceWithRawResponse(client.orgs)
         self.toolbox = toolbox.AsyncToolboxResourceWithRawResponse(client.toolbox)
+        self.cloud = cloud.AsyncCloudResourceWithRawResponse(client.cloud)
 
 
 class EntitiesWithStreamedResponse:
@@ -407,6 +414,7 @@ class EntitiesWithStreamedResponse:
         self.memory = memory.MemoryResourceWithStreamingResponse(client.memory)
         self.orgs = orgs.OrgsResourceWithStreamingResponse(client.orgs)
         self.toolbox = toolbox.ToolboxResourceWithStreamingResponse(client.toolbox)
+        self.cloud = cloud.CloudResourceWithStreamingResponse(client.cloud)
 
 
 class AsyncEntitiesWithStreamedResponse:
@@ -414,6 +422,7 @@ class AsyncEntitiesWithStreamedResponse:
         self.memory = memory.AsyncMemoryResourceWithStreamingResponse(client.memory)
         self.orgs = orgs.AsyncOrgsResourceWithStreamingResponse(client.orgs)
         self.toolbox = toolbox.AsyncToolboxResourceWithStreamingResponse(client.toolbox)
+        self.cloud = cloud.AsyncCloudResourceWithStreamingResponse(client.cloud)
 
 
 Client = Entities
