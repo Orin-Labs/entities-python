@@ -1,7 +1,7 @@
 # Entities Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/entities-python.svg?label=pypi%20(stable))](https://pypi.org/project/entities-python/)
+[![PyPI version](https://img.shields.io/pypi/v/entities.svg?label=pypi%20(stable))](https://pypi.org/project/entities/)
 
 The Entities Python library provides convenient access to the Entities REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -16,9 +16,12 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from PyPI
-pip install --pre entities-python
+# install from the production repo
+pip install git+ssh://git@github.com/Orin-Labs/entities-python.git
 ```
+
+> [!NOTE]
+> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install --pre entities`
 
 ## Usage
 
@@ -70,8 +73,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from PyPI
-pip install --pre entities-python[aiohttp]
+# install from the production repo
+pip install 'entities[aiohttp] @ git+ssh://git@github.com/Orin-Labs/entities-python.git'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
