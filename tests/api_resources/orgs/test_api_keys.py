@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from entities import Entities, AsyncEntities
 from tests.utils import assert_matches_type
-from entities_python import Entities, AsyncEntities
-from entities_python.types.orgs import APIKey, APIKeyListResponse
+from entities.types.orgs import APIKey, APIKeyListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

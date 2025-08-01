@@ -21,11 +21,11 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from entities_python import Entities, AsyncEntities, APIResponseValidationError
-from entities_python._types import Omit
-from entities_python._models import BaseModel, FinalRequestOptions
-from entities_python._exceptions import EntitiesError, APIStatusError, APITimeoutError, APIResponseValidationError
-from entities_python._base_client import (
+from entities import Entities, AsyncEntities, APIResponseValidationError
+from entities._types import Omit
+from entities._models import BaseModel, FinalRequestOptions
+from entities._exceptions import EntitiesError, APIStatusError, APITimeoutError, APIResponseValidationError
+from entities._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -232,10 +232,10 @@ class TestEntities:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "entities_python/_legacy_response.py",
-                        "entities_python/_response.py",
+                        "entities/_legacy_response.py",
+                        "entities/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "entities_python/_compat.py",
+                        "entities/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -711,7 +711,7 @@ class TestEntities:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Entities) -> None:
         respx_mock.get("/api/memory/drm-instances/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -721,7 +721,7 @@ class TestEntities:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Entities) -> None:
         respx_mock.get("/api/memory/drm-instances/").mock(return_value=httpx.Response(500))
@@ -731,7 +731,7 @@ class TestEntities:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -762,7 +762,7 @@ class TestEntities:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
         self, client: Entities, failures_before_success: int, respx_mock: MockRouter
@@ -785,7 +785,7 @@ class TestEntities:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Entities, failures_before_success: int, respx_mock: MockRouter
@@ -1033,10 +1033,10 @@ class TestAsyncEntities:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "entities_python/_legacy_response.py",
-                        "entities_python/_response.py",
+                        "entities/_legacy_response.py",
+                        "entities/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "entities_python/_compat.py",
+                        "entities/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1526,7 +1526,7 @@ class TestAsyncEntities:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncEntities
@@ -1538,7 +1538,7 @@ class TestAsyncEntities:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncEntities
@@ -1550,7 +1550,7 @@ class TestAsyncEntities:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
@@ -1582,7 +1582,7 @@ class TestAsyncEntities:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
@@ -1608,7 +1608,7 @@ class TestAsyncEntities:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("entities_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("entities._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
@@ -1644,8 +1644,8 @@ class TestAsyncEntities:
         import nest_asyncio
         import threading
 
-        from entities_python._utils import asyncify
-        from entities_python._base_client import get_platform
+        from entities._utils import asyncify
+        from entities._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
