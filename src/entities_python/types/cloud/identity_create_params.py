@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Required, Annotated, TypedDict
 
@@ -14,6 +14,8 @@ __all__ = ["IdentityCreateParams"]
 class IdentityCreateParams(TypedDict, total=False):
     memory: Required[int]
 
+    model: Required[str]
+
     name: Required[str]
 
     sleep_until: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
@@ -21,3 +23,5 @@ class IdentityCreateParams(TypedDict, total=False):
     system_prompt: str
 
     timezone: str
+
+    tools: List[str]

@@ -1,12 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
 from datetime import datetime
 
-from .identity import Identity
 from ..._models import BaseModel
 from .status_enum import StatusEnum
-from ..toolbox.tool import Tool
 
 __all__ = ["Runtime"]
 
@@ -18,11 +15,9 @@ class Runtime(BaseModel):
 
     current_turn: int
 
-    identity: Identity
+    identity: str
 
     max_turns: int
-
-    model: str
 
     status: StatusEnum
     """
@@ -32,5 +27,3 @@ class Runtime(BaseModel):
     - `completed` - Completed
     - `failed` - Failed
     """
-
-    tools: List[Tool]

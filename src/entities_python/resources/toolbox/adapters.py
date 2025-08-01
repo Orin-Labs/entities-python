@@ -114,8 +114,8 @@ class AdaptersResource(SyncAPIResource):
         self,
         id: str,
         *,
-        description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        description: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,7 +135,7 @@ class AdaptersResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._patch(
+        return self._put(
             f"/api/toolbox/adapters/{id}/",
             body=maybe_transform(
                 {
@@ -293,8 +293,8 @@ class AsyncAdaptersResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        description: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -314,7 +314,7 @@ class AsyncAdaptersResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._patch(
+        return await self._put(
             f"/api/toolbox/adapters/{id}/",
             body=await async_maybe_transform(
                 {
