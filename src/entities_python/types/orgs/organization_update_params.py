@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["OrganizationUpdateParams"]
 
 
 class OrganizationUpdateParams(TypedDict, total=False):
-    name: Required[str]
+    name: str
