@@ -13,6 +13,8 @@ class DrmInstance(BaseModel):
 
     created_at: datetime
 
+    organization: str
+
     updated_at: datetime
 
     name: Optional[str] = None

@@ -13,10 +13,8 @@ class ToolCreateParams(TypedDict, total=False):
 
     name: Required[str]
 
-    parameters: Required[object]
-
     url: Required[str]
 
     adapter: Optional[str]
 
-    organization: Optional[str]
+    parameters: object
