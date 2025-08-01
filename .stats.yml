@@ -1,4 +1,4 @@
 configured_endpoints: 33
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/orin-labs%2Fentities-ee3e20adff66e45e6aca0a07e73c8f80321833806a1005a4e5aa919a5bdb1869.yml
-openapi_spec_hash: 8f9190a89baafb078f4ff88faefb77b2
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/orin-labs%2Fentities-f8b0fc7fa4ada0f7d1456a2611b00ad718902cdeb0edcc6913b8461963e35951.yml
+openapi_spec_hash: 1614dd868cd3f53bff7ab2a59fd3a66d
 config_hash: 23a6a1abf81db111783f932fa15fcaad
