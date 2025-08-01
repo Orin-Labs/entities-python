@@ -20,5 +20,3 @@ class DrmInstance(BaseModel):
     name: Optional[str] = None
 
     summarizer_model: Optional[str] = None
-
-    timezone: Optional[str] = None

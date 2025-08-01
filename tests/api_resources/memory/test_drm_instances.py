@@ -36,7 +36,6 @@ class TestDrmInstances:
         drm_instance = client.memory.drm_instances.create(
             name="name",
             summarizer_model="summarizer_model",
-            timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -111,7 +110,6 @@ class TestDrmInstances:
             id=0,
             name="name",
             summarizer_model="summarizer_model",
-            timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -336,7 +334,6 @@ class TestAsyncDrmInstances:
         drm_instance = await async_client.memory.drm_instances.create(
             name="name",
             summarizer_model="summarizer_model",
-            timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
@@ -411,7 +408,6 @@ class TestAsyncDrmInstances:
             id=0,
             name="name",
             summarizer_model="summarizer_model",
-            timezone="timezone",
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 

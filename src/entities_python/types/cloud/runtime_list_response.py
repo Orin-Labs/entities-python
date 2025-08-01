@@ -5,36 +5,52 @@ from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
+from ..toolbox.tool import Tool
 
-__all__ = ["RuntimeListResponse", "RuntimeListResponseItem"]
+__all__ = ["RuntimeListResponse", "RuntimeListResponseItem", "RuntimeListResponseItemIdentity"]
+
+
+class RuntimeListResponseItemIdentity(BaseModel):
+    id: str
+
+    created_at: datetime
+
+    memory: int
+
+    name: str
+
+    organization: str
+
+    sleep_until: Optional[datetime] = None
+
+    system_prompt: Optional[str] = None
+
+    timezone: Optional[str] = None
 
 
 class RuntimeListResponseItem(BaseModel):
     id: str
 
-    agent_key: str
-
     created_at: datetime
 
     current_turn: int
 
-    max_turns: int
+    identity: RuntimeListResponseItemIdentity
 
-    memory: int
+    max_turns: int
 
     model: str
 
-    organization: str
-
-    status: Optional[Literal["pending", "running", "completed", "failed"]] = None
+    status: Literal["created", "pending", "running", "completed", "failed"]
     """
+    - `created` - Created
     - `pending` - Pending
     - `running` - Running
     - `completed` - Completed
     - `failed` - Failed
     """
 
-    tools: Optional[List[str]] = None
+    tools: List[Tool]
 
 
 RuntimeListResponse: TypeAlias = List[RuntimeListResponseItem]

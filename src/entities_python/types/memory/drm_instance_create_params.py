@@ -11,5 +11,3 @@ class DrmInstanceCreateParams(TypedDict, total=False):
     name: str
 
     summarizer_model: str
-
-    timezone: str
