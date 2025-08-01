@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
@@ -14,46 +16,50 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.orgs import api_key_create_params, api_key_update_params
+from ...types.tools import tool_create_params, tool_update_params
 from ..._base_client import make_request_options
-from ...types.orgs.api_key import APIKey
-from ...types.orgs.api_key_list_response import APIKeyListResponse
+from ...types.tools.tool import Tool
+from ...types.tools.tool_list_response import ToolListResponse
 
-__all__ = ["APIKeysResource", "AsyncAPIKeysResource"]
+__all__ = ["ToolsResource", "AsyncToolsResource"]
 
 
-class APIKeysResource(SyncAPIResource):
+class ToolsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> APIKeysResourceWithRawResponse:
+    def with_raw_response(self) -> ToolsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/entities-python#accessing-raw-response-data-eg-headers
         """
-        return APIKeysResourceWithRawResponse(self)
+        return ToolsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> APIKeysResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ToolsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/entities-python#with_streaming_response
         """
-        return APIKeysResourceWithStreamingResponse(self)
+        return ToolsResourceWithStreamingResponse(self)
 
     def create(
         self,
         *,
-        is_active: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        description: str,
+        name: str,
+        parameters: object,
+        url: str,
+        adapter: Optional[str] | NotGiven = NOT_GIVEN,
+        organization: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKey:
+    ) -> Tool:
         """
         Args:
           extra_headers: Send extra headers
@@ -65,23 +71,27 @@ class APIKeysResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/orgs/api-keys/",
+            "/api/tools/tools/",
             body=maybe_transform(
                 {
-                    "is_active": is_active,
+                    "description": description,
                     "name": name,
+                    "parameters": parameters,
+                    "url": url,
+                    "adapter": adapter,
+                    "organization": organization,
                 },
-                api_key_create_params.APIKeyCreateParams,
+                tool_create_params.ToolCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKey,
+            cast_to=Tool,
         )
 
     def retrieve(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -89,7 +99,7 @@ class APIKeysResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKey:
+    ) -> Tool:
         """
         Args:
           extra_headers: Send extra headers
@@ -100,27 +110,33 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/orgs/api-keys/{id}/",
+            f"/api/tools/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKey,
+            cast_to=Tool,
         )
 
     def update(
         self,
-        id: int,
+        id: str,
         *,
-        is_active: bool | NotGiven = NOT_GIVEN,
+        adapter: Optional[str] | NotGiven = NOT_GIVEN,
+        description: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        organization: Optional[str] | NotGiven = NOT_GIVEN,
+        parameters: object | NotGiven = NOT_GIVEN,
+        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKey:
+    ) -> Tool:
         """
         Args:
           extra_headers: Send extra headers
@@ -131,19 +147,25 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
-            f"/api/orgs/api-keys/{id}/",
+            f"/api/tools/tools/{id}/",
             body=maybe_transform(
                 {
-                    "is_active": is_active,
+                    "adapter": adapter,
+                    "description": description,
                     "name": name,
+                    "organization": organization,
+                    "parameters": parameters,
+                    "url": url,
                 },
-                api_key_update_params.APIKeyUpdateParams,
+                tool_update_params.ToolUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKey,
+            cast_to=Tool,
         )
 
     def list(
@@ -155,18 +177,18 @@ class APIKeysResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKeyListResponse:
+    ) -> ToolListResponse:
         return self._get(
-            "/api/orgs/api-keys/",
+            "/api/tools/tools/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKeyListResponse,
+            cast_to=ToolListResponse,
         )
 
     def delete(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -185,9 +207,11 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/orgs/api-keys/{id}/",
+            f"/api/tools/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -195,38 +219,42 @@ class APIKeysResource(SyncAPIResource):
         )
 
 
-class AsyncAPIKeysResource(AsyncAPIResource):
+class AsyncToolsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAPIKeysResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncToolsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/entities-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncAPIKeysResourceWithRawResponse(self)
+        return AsyncToolsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAPIKeysResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncToolsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/entities-python#with_streaming_response
         """
-        return AsyncAPIKeysResourceWithStreamingResponse(self)
+        return AsyncToolsResourceWithStreamingResponse(self)
 
     async def create(
         self,
         *,
-        is_active: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        description: str,
+        name: str,
+        parameters: object,
+        url: str,
+        adapter: Optional[str] | NotGiven = NOT_GIVEN,
+        organization: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKey:
+    ) -> Tool:
         """
         Args:
           extra_headers: Send extra headers
@@ -238,23 +266,27 @@ class AsyncAPIKeysResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/orgs/api-keys/",
+            "/api/tools/tools/",
             body=await async_maybe_transform(
                 {
-                    "is_active": is_active,
+                    "description": description,
                     "name": name,
+                    "parameters": parameters,
+                    "url": url,
+                    "adapter": adapter,
+                    "organization": organization,
                 },
-                api_key_create_params.APIKeyCreateParams,
+                tool_create_params.ToolCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKey,
+            cast_to=Tool,
         )
 
     async def retrieve(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -262,7 +294,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKey:
+    ) -> Tool:
         """
         Args:
           extra_headers: Send extra headers
@@ -273,27 +305,33 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/orgs/api-keys/{id}/",
+            f"/api/tools/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKey,
+            cast_to=Tool,
         )
 
     async def update(
         self,
-        id: int,
+        id: str,
         *,
-        is_active: bool | NotGiven = NOT_GIVEN,
+        adapter: Optional[str] | NotGiven = NOT_GIVEN,
+        description: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        organization: Optional[str] | NotGiven = NOT_GIVEN,
+        parameters: object | NotGiven = NOT_GIVEN,
+        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKey:
+    ) -> Tool:
         """
         Args:
           extra_headers: Send extra headers
@@ -304,19 +342,25 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
-            f"/api/orgs/api-keys/{id}/",
+            f"/api/tools/tools/{id}/",
             body=await async_maybe_transform(
                 {
-                    "is_active": is_active,
+                    "adapter": adapter,
+                    "description": description,
                     "name": name,
+                    "organization": organization,
+                    "parameters": parameters,
+                    "url": url,
                 },
-                api_key_update_params.APIKeyUpdateParams,
+                tool_update_params.ToolUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKey,
+            cast_to=Tool,
         )
 
     async def list(
@@ -328,18 +372,18 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> APIKeyListResponse:
+    ) -> ToolListResponse:
         return await self._get(
-            "/api/orgs/api-keys/",
+            "/api/tools/tools/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=APIKeyListResponse,
+            cast_to=ToolListResponse,
         )
 
     async def delete(
         self,
-        id: int,
+        id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -358,9 +402,11 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/orgs/api-keys/{id}/",
+            f"/api/tools/tools/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -368,85 +414,85 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         )
 
 
-class APIKeysResourceWithRawResponse:
-    def __init__(self, api_keys: APIKeysResource) -> None:
-        self._api_keys = api_keys
+class ToolsResourceWithRawResponse:
+    def __init__(self, tools: ToolsResource) -> None:
+        self._tools = tools
 
         self.create = to_raw_response_wrapper(
-            api_keys.create,
+            tools.create,
         )
         self.retrieve = to_raw_response_wrapper(
-            api_keys.retrieve,
+            tools.retrieve,
         )
         self.update = to_raw_response_wrapper(
-            api_keys.update,
+            tools.update,
         )
         self.list = to_raw_response_wrapper(
-            api_keys.list,
+            tools.list,
         )
         self.delete = to_raw_response_wrapper(
-            api_keys.delete,
+            tools.delete,
         )
 
 
-class AsyncAPIKeysResourceWithRawResponse:
-    def __init__(self, api_keys: AsyncAPIKeysResource) -> None:
-        self._api_keys = api_keys
+class AsyncToolsResourceWithRawResponse:
+    def __init__(self, tools: AsyncToolsResource) -> None:
+        self._tools = tools
 
         self.create = async_to_raw_response_wrapper(
-            api_keys.create,
+            tools.create,
         )
         self.retrieve = async_to_raw_response_wrapper(
-            api_keys.retrieve,
+            tools.retrieve,
         )
         self.update = async_to_raw_response_wrapper(
-            api_keys.update,
+            tools.update,
         )
         self.list = async_to_raw_response_wrapper(
-            api_keys.list,
+            tools.list,
         )
         self.delete = async_to_raw_response_wrapper(
-            api_keys.delete,
+            tools.delete,
         )
 
 
-class APIKeysResourceWithStreamingResponse:
-    def __init__(self, api_keys: APIKeysResource) -> None:
-        self._api_keys = api_keys
+class ToolsResourceWithStreamingResponse:
+    def __init__(self, tools: ToolsResource) -> None:
+        self._tools = tools
 
         self.create = to_streamed_response_wrapper(
-            api_keys.create,
+            tools.create,
         )
         self.retrieve = to_streamed_response_wrapper(
-            api_keys.retrieve,
+            tools.retrieve,
         )
         self.update = to_streamed_response_wrapper(
-            api_keys.update,
+            tools.update,
         )
         self.list = to_streamed_response_wrapper(
-            api_keys.list,
+            tools.list,
         )
         self.delete = to_streamed_response_wrapper(
-            api_keys.delete,
+            tools.delete,
         )
 
 
-class AsyncAPIKeysResourceWithStreamingResponse:
-    def __init__(self, api_keys: AsyncAPIKeysResource) -> None:
-        self._api_keys = api_keys
+class AsyncToolsResourceWithStreamingResponse:
+    def __init__(self, tools: AsyncToolsResource) -> None:
+        self._tools = tools
 
         self.create = async_to_streamed_response_wrapper(
-            api_keys.create,
+            tools.create,
         )
         self.retrieve = async_to_streamed_response_wrapper(
-            api_keys.retrieve,
+            tools.retrieve,
         )
         self.update = async_to_streamed_response_wrapper(
-            api_keys.update,
+            tools.update,
         )
         self.list = async_to_streamed_response_wrapper(
-            api_keys.list,
+            tools.list,
         )
         self.delete = async_to_streamed_response_wrapper(
-            api_keys.delete,
+            tools.delete,
         )
