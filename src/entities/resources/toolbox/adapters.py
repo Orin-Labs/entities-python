@@ -16,10 +16,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.tools import adapter_create_params, adapter_update_params
 from ..._base_client import make_request_options
-from ...types.tools.adapter import Adapter
-from ...types.tools.adapter_list_response import AdapterListResponse
+from ...types.toolbox import adapter_create_params, adapter_update_params
+from ...types.toolbox.adapter import Adapter
+from ...types.toolbox.adapter_list_response import AdapterListResponse
 
 __all__ = ["AdaptersResource", "AsyncAdaptersResource"]
 
@@ -68,7 +68,7 @@ class AdaptersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/tools/adapters/",
+            "/api/toolbox/adapters/",
             body=maybe_transform(
                 {
                     "description": description,
@@ -107,7 +107,7 @@ class AdaptersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/tools/adapters/{id}/",
+            f"/api/toolbox/adapters/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -141,7 +141,7 @@ class AdaptersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
-            f"/api/tools/adapters/{id}/",
+            f"/api/toolbox/adapters/{id}/",
             body=maybe_transform(
                 {
                     "description": description,
@@ -167,7 +167,7 @@ class AdaptersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AdapterListResponse:
         return self._get(
-            "/api/tools/adapters/",
+            "/api/toolbox/adapters/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -199,7 +199,7 @@ class AdaptersResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/tools/adapters/{id}/",
+            f"/api/toolbox/adapters/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -251,7 +251,7 @@ class AsyncAdaptersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/tools/adapters/",
+            "/api/toolbox/adapters/",
             body=await async_maybe_transform(
                 {
                     "description": description,
@@ -290,7 +290,7 @@ class AsyncAdaptersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/tools/adapters/{id}/",
+            f"/api/toolbox/adapters/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -324,7 +324,7 @@ class AsyncAdaptersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
-            f"/api/tools/adapters/{id}/",
+            f"/api/toolbox/adapters/{id}/",
             body=await async_maybe_transform(
                 {
                     "description": description,
@@ -350,7 +350,7 @@ class AsyncAdaptersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AdapterListResponse:
         return await self._get(
-            "/api/tools/adapters/",
+            "/api/toolbox/adapters/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -382,7 +382,7 @@ class AsyncAdaptersResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/tools/adapters/{id}/",
+            f"/api/toolbox/adapters/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
