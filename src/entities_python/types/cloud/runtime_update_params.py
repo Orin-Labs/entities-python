@@ -2,29 +2,33 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Literal, TypedDict
+from typing import Union, Iterable
+from datetime import datetime
+from typing_extensions import Required, Annotated, TypedDict
 
-__all__ = ["RuntimeUpdateParams"]
+from ..._utils import PropertyInfo
+from ..toolbox.tool_param import ToolParam
+
+__all__ = ["RuntimeUpdateParams", "Identity"]
 
 
 class RuntimeUpdateParams(TypedDict, total=False):
-    agent_key: str
-
-    current_turn: int
+    identity: Identity
 
     max_turns: int
 
-    memory: int
-
     model: str
 
-    status: Literal["pending", "running", "completed", "failed"]
-    """
-    - `pending` - Pending
-    - `running` - Running
-    - `completed` - Completed
-    - `failed` - Failed
-    """
+    tools: Iterable[ToolParam]
 
-    tools: List[str]
+
+class Identity(TypedDict, total=False):
+    memory: Required[int]
+
+    name: Required[str]
+
+    sleep_until: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+
+    system_prompt: str
+
+    timezone: str

@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Literal
+from typing import Iterable
 
 import httpx
 
@@ -19,6 +18,7 @@ from ..._response import (
 )
 from ...types.cloud import runtime_create_params, runtime_update_params
 from ..._base_client import make_request_options
+from ...types.toolbox.tool_param import ToolParam
 from ...types.cloud.runtime_list_response import RuntimeListResponse
 from ...types.cloud.runtime_create_response import RuntimeCreateResponse
 from ...types.cloud.runtime_update_response import RuntimeUpdateResponse
@@ -50,13 +50,10 @@ class RuntimesResource(SyncAPIResource):
     def create(
         self,
         *,
-        agent_key: str,
-        current_turn: int,
+        identity: runtime_create_params.Identity,
         max_turns: int,
-        memory: int,
         model: str,
-        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
+        tools: Iterable[ToolParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -66,11 +63,6 @@ class RuntimesResource(SyncAPIResource):
     ) -> RuntimeCreateResponse:
         """
         Args:
-          status: - `pending` - Pending
-              - `running` - Running
-              - `completed` - Completed
-              - `failed` - Failed
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -83,12 +75,9 @@ class RuntimesResource(SyncAPIResource):
             "/api/cloud/runtimes/",
             body=maybe_transform(
                 {
-                    "agent_key": agent_key,
-                    "current_turn": current_turn,
+                    "identity": identity,
                     "max_turns": max_turns,
-                    "memory": memory,
                     "model": model,
-                    "status": status,
                     "tools": tools,
                 },
                 runtime_create_params.RuntimeCreateParams,
@@ -134,13 +123,10 @@ class RuntimesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        agent_key: str | NotGiven = NOT_GIVEN,
-        current_turn: int | NotGiven = NOT_GIVEN,
+        identity: runtime_update_params.Identity | NotGiven = NOT_GIVEN,
         max_turns: int | NotGiven = NOT_GIVEN,
-        memory: int | NotGiven = NOT_GIVEN,
         model: str | NotGiven = NOT_GIVEN,
-        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
+        tools: Iterable[ToolParam] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -150,11 +136,6 @@ class RuntimesResource(SyncAPIResource):
     ) -> RuntimeUpdateResponse:
         """
         Args:
-          status: - `pending` - Pending
-              - `running` - Running
-              - `completed` - Completed
-              - `failed` - Failed
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -169,12 +150,9 @@ class RuntimesResource(SyncAPIResource):
             f"/api/cloud/runtimes/{id}/",
             body=maybe_transform(
                 {
-                    "agent_key": agent_key,
-                    "current_turn": current_turn,
+                    "identity": identity,
                     "max_turns": max_turns,
-                    "memory": memory,
                     "model": model,
-                    "status": status,
                     "tools": tools,
                 },
                 runtime_update_params.RuntimeUpdateParams,
@@ -259,13 +237,10 @@ class AsyncRuntimesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        agent_key: str,
-        current_turn: int,
+        identity: runtime_create_params.Identity,
         max_turns: int,
-        memory: int,
         model: str,
-        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
+        tools: Iterable[ToolParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -275,11 +250,6 @@ class AsyncRuntimesResource(AsyncAPIResource):
     ) -> RuntimeCreateResponse:
         """
         Args:
-          status: - `pending` - Pending
-              - `running` - Running
-              - `completed` - Completed
-              - `failed` - Failed
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -292,12 +262,9 @@ class AsyncRuntimesResource(AsyncAPIResource):
             "/api/cloud/runtimes/",
             body=await async_maybe_transform(
                 {
-                    "agent_key": agent_key,
-                    "current_turn": current_turn,
+                    "identity": identity,
                     "max_turns": max_turns,
-                    "memory": memory,
                     "model": model,
-                    "status": status,
                     "tools": tools,
                 },
                 runtime_create_params.RuntimeCreateParams,
@@ -343,13 +310,10 @@ class AsyncRuntimesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        agent_key: str | NotGiven = NOT_GIVEN,
-        current_turn: int | NotGiven = NOT_GIVEN,
+        identity: runtime_update_params.Identity | NotGiven = NOT_GIVEN,
         max_turns: int | NotGiven = NOT_GIVEN,
-        memory: int | NotGiven = NOT_GIVEN,
         model: str | NotGiven = NOT_GIVEN,
-        status: Literal["pending", "running", "completed", "failed"] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
+        tools: Iterable[ToolParam] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -359,11 +323,6 @@ class AsyncRuntimesResource(AsyncAPIResource):
     ) -> RuntimeUpdateResponse:
         """
         Args:
-          status: - `pending` - Pending
-              - `running` - Running
-              - `completed` - Completed
-              - `failed` - Failed
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -378,12 +337,9 @@ class AsyncRuntimesResource(AsyncAPIResource):
             f"/api/cloud/runtimes/{id}/",
             body=await async_maybe_transform(
                 {
-                    "agent_key": agent_key,
-                    "current_turn": current_turn,
+                    "identity": identity,
                     "max_turns": max_turns,
-                    "memory": memory,
                     "model": model,
-                    "status": status,
                     "tools": tools,
                 },
                 runtime_update_params.RuntimeUpdateParams,
