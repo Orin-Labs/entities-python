@@ -16,6 +16,14 @@ from .runtimes import (
     RuntimesResourceWithStreamingResponse,
     AsyncRuntimesResourceWithStreamingResponse,
 )
+from .identities import (
+    IdentitiesResource,
+    AsyncIdentitiesResource,
+    IdentitiesResourceWithRawResponse,
+    AsyncIdentitiesResourceWithRawResponse,
+    IdentitiesResourceWithStreamingResponse,
+    AsyncIdentitiesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "RuntimesResource",
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncRuntimesResourceWithRawResponse",
     "RuntimesResourceWithStreamingResponse",
     "AsyncRuntimesResourceWithStreamingResponse",
+    "IdentitiesResource",
+    "AsyncIdentitiesResource",
+    "IdentitiesResourceWithRawResponse",
+    "AsyncIdentitiesResourceWithRawResponse",
+    "IdentitiesResourceWithStreamingResponse",
+    "AsyncIdentitiesResourceWithStreamingResponse",
     "CloudResource",
     "AsyncCloudResource",
     "CloudResourceWithRawResponse",

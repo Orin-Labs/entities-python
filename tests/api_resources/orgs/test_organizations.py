@@ -93,6 +93,14 @@ class TestOrganizations:
     def test_method_update(self, client: Entities) -> None:
         organization = client.orgs.organizations.update(
             id=0,
+        )
+        assert_matches_type(Organization, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Entities) -> None:
+        organization = client.orgs.organizations.update(
+            id=0,
             name="name",
         )
         assert_matches_type(Organization, organization, path=["response"])
@@ -102,7 +110,6 @@ class TestOrganizations:
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.update(
             id=0,
-            name="name",
         )
 
         assert response.is_closed is True
@@ -115,7 +122,6 @@ class TestOrganizations:
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.update(
             id=0,
-            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -266,6 +272,14 @@ class TestAsyncOrganizations:
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.update(
             id=0,
+        )
+        assert_matches_type(Organization, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
+        organization = await async_client.orgs.organizations.update(
+            id=0,
             name="name",
         )
         assert_matches_type(Organization, organization, path=["response"])
@@ -275,7 +289,6 @@ class TestAsyncOrganizations:
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.update(
             id=0,
-            name="name",
         )
 
         assert response.is_closed is True
@@ -288,7 +301,6 @@ class TestAsyncOrganizations:
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.update(
             id=0,
-            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

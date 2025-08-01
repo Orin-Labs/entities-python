@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Union
+from datetime import datetime
 
 import httpx
 
@@ -16,50 +17,49 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.cloud import runtime_create_params, runtime_update_params
+from ...types.cloud import identity_create_params, identity_update_params
 from ..._base_client import make_request_options
-from ...types.cloud.runtime import Runtime
-from ...types.toolbox.tool_param import ToolParam
-from ...types.cloud.identity_param import IdentityParam
-from ...types.cloud.runtime_list_response import RuntimeListResponse
+from ...types.cloud.identity import Identity
+from ...types.cloud.identity_list_response import IdentityListResponse
 
-__all__ = ["RuntimesResource", "AsyncRuntimesResource"]
+__all__ = ["IdentitiesResource", "AsyncIdentitiesResource"]
 
 
-class RuntimesResource(SyncAPIResource):
+class IdentitiesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> RuntimesResourceWithRawResponse:
+    def with_raw_response(self) -> IdentitiesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#accessing-raw-response-data-eg-headers
         """
-        return RuntimesResourceWithRawResponse(self)
+        return IdentitiesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> RuntimesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> IdentitiesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#with_streaming_response
         """
-        return RuntimesResourceWithStreamingResponse(self)
+        return IdentitiesResourceWithStreamingResponse(self)
 
     def create(
         self,
         *,
-        identity: IdentityParam,
-        max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
+        memory: int,
+        name: str,
+        sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        system_prompt: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Runtime:
+    ) -> Identity:
         """
         Args:
           extra_headers: Send extra headers
@@ -71,20 +71,21 @@ class RuntimesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/cloud/runtimes/",
+            "/api/cloud/identities/",
             body=maybe_transform(
                 {
-                    "identity": identity,
-                    "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
+                    "memory": memory,
+                    "name": name,
+                    "sleep_until": sleep_until,
+                    "system_prompt": system_prompt,
+                    "timezone": timezone,
                 },
-                runtime_create_params.RuntimeCreateParams,
+                identity_create_params.IdentityCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Runtime,
+            cast_to=Identity,
         )
 
     def retrieve(
@@ -97,7 +98,7 @@ class RuntimesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Runtime:
+    ) -> Identity:
         """
         Args:
           extra_headers: Send extra headers
@@ -111,28 +112,29 @@ class RuntimesResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/api/cloud/runtimes/{id}/",
+            f"/api/cloud/identities/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Runtime,
+            cast_to=Identity,
         )
 
     def update(
         self,
         id: str,
         *,
-        identity: IdentityParam,
-        max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
+        memory: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        system_prompt: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Runtime:
+    ) -> Identity:
         """
         Args:
           extra_headers: Send extra headers
@@ -145,21 +147,22 @@ class RuntimesResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._put(
-            f"/api/cloud/runtimes/{id}/",
+        return self._patch(
+            f"/api/cloud/identities/{id}/",
             body=maybe_transform(
                 {
-                    "identity": identity,
-                    "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
+                    "memory": memory,
+                    "name": name,
+                    "sleep_until": sleep_until,
+                    "system_prompt": system_prompt,
+                    "timezone": timezone,
                 },
-                runtime_update_params.RuntimeUpdateParams,
+                identity_update_params.IdentityUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Runtime,
+            cast_to=Identity,
         )
 
     def list(
@@ -171,13 +174,13 @@ class RuntimesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RuntimeListResponse:
+    ) -> IdentityListResponse:
         return self._get(
-            "/api/cloud/runtimes/",
+            "/api/cloud/identities/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RuntimeListResponse,
+            cast_to=IdentityListResponse,
         )
 
     def delete(
@@ -205,7 +208,7 @@ class RuntimesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/cloud/runtimes/{id}/",
+            f"/api/cloud/identities/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -213,40 +216,41 @@ class RuntimesResource(SyncAPIResource):
         )
 
 
-class AsyncRuntimesResource(AsyncAPIResource):
+class AsyncIdentitiesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncRuntimesResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncIdentitiesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncRuntimesResourceWithRawResponse(self)
+        return AsyncIdentitiesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncRuntimesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncIdentitiesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Orin-Labs/entities-python#with_streaming_response
         """
-        return AsyncRuntimesResourceWithStreamingResponse(self)
+        return AsyncIdentitiesResourceWithStreamingResponse(self)
 
     async def create(
         self,
         *,
-        identity: IdentityParam,
-        max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
+        memory: int,
+        name: str,
+        sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        system_prompt: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Runtime:
+    ) -> Identity:
         """
         Args:
           extra_headers: Send extra headers
@@ -258,20 +262,21 @@ class AsyncRuntimesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/cloud/runtimes/",
+            "/api/cloud/identities/",
             body=await async_maybe_transform(
                 {
-                    "identity": identity,
-                    "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
+                    "memory": memory,
+                    "name": name,
+                    "sleep_until": sleep_until,
+                    "system_prompt": system_prompt,
+                    "timezone": timezone,
                 },
-                runtime_create_params.RuntimeCreateParams,
+                identity_create_params.IdentityCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Runtime,
+            cast_to=Identity,
         )
 
     async def retrieve(
@@ -284,7 +289,7 @@ class AsyncRuntimesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Runtime:
+    ) -> Identity:
         """
         Args:
           extra_headers: Send extra headers
@@ -298,28 +303,29 @@ class AsyncRuntimesResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/api/cloud/runtimes/{id}/",
+            f"/api/cloud/identities/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Runtime,
+            cast_to=Identity,
         )
 
     async def update(
         self,
         id: str,
         *,
-        identity: IdentityParam,
-        max_turns: int,
-        model: str,
-        tools: Iterable[ToolParam],
+        memory: int | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        sleep_until: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        system_prompt: str | NotGiven = NOT_GIVEN,
+        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Runtime:
+    ) -> Identity:
         """
         Args:
           extra_headers: Send extra headers
@@ -332,21 +338,22 @@ class AsyncRuntimesResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._put(
-            f"/api/cloud/runtimes/{id}/",
+        return await self._patch(
+            f"/api/cloud/identities/{id}/",
             body=await async_maybe_transform(
                 {
-                    "identity": identity,
-                    "max_turns": max_turns,
-                    "model": model,
-                    "tools": tools,
+                    "memory": memory,
+                    "name": name,
+                    "sleep_until": sleep_until,
+                    "system_prompt": system_prompt,
+                    "timezone": timezone,
                 },
-                runtime_update_params.RuntimeUpdateParams,
+                identity_update_params.IdentityUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Runtime,
+            cast_to=Identity,
         )
 
     async def list(
@@ -358,13 +365,13 @@ class AsyncRuntimesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RuntimeListResponse:
+    ) -> IdentityListResponse:
         return await self._get(
-            "/api/cloud/runtimes/",
+            "/api/cloud/identities/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RuntimeListResponse,
+            cast_to=IdentityListResponse,
         )
 
     async def delete(
@@ -392,7 +399,7 @@ class AsyncRuntimesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/cloud/runtimes/{id}/",
+            f"/api/cloud/identities/{id}/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -400,85 +407,85 @@ class AsyncRuntimesResource(AsyncAPIResource):
         )
 
 
-class RuntimesResourceWithRawResponse:
-    def __init__(self, runtimes: RuntimesResource) -> None:
-        self._runtimes = runtimes
+class IdentitiesResourceWithRawResponse:
+    def __init__(self, identities: IdentitiesResource) -> None:
+        self._identities = identities
 
         self.create = to_raw_response_wrapper(
-            runtimes.create,
+            identities.create,
         )
         self.retrieve = to_raw_response_wrapper(
-            runtimes.retrieve,
+            identities.retrieve,
         )
         self.update = to_raw_response_wrapper(
-            runtimes.update,
+            identities.update,
         )
         self.list = to_raw_response_wrapper(
-            runtimes.list,
+            identities.list,
         )
         self.delete = to_raw_response_wrapper(
-            runtimes.delete,
+            identities.delete,
         )
 
 
-class AsyncRuntimesResourceWithRawResponse:
-    def __init__(self, runtimes: AsyncRuntimesResource) -> None:
-        self._runtimes = runtimes
+class AsyncIdentitiesResourceWithRawResponse:
+    def __init__(self, identities: AsyncIdentitiesResource) -> None:
+        self._identities = identities
 
         self.create = async_to_raw_response_wrapper(
-            runtimes.create,
+            identities.create,
         )
         self.retrieve = async_to_raw_response_wrapper(
-            runtimes.retrieve,
+            identities.retrieve,
         )
         self.update = async_to_raw_response_wrapper(
-            runtimes.update,
+            identities.update,
         )
         self.list = async_to_raw_response_wrapper(
-            runtimes.list,
+            identities.list,
         )
         self.delete = async_to_raw_response_wrapper(
-            runtimes.delete,
+            identities.delete,
         )
 
 
-class RuntimesResourceWithStreamingResponse:
-    def __init__(self, runtimes: RuntimesResource) -> None:
-        self._runtimes = runtimes
+class IdentitiesResourceWithStreamingResponse:
+    def __init__(self, identities: IdentitiesResource) -> None:
+        self._identities = identities
 
         self.create = to_streamed_response_wrapper(
-            runtimes.create,
+            identities.create,
         )
         self.retrieve = to_streamed_response_wrapper(
-            runtimes.retrieve,
+            identities.retrieve,
         )
         self.update = to_streamed_response_wrapper(
-            runtimes.update,
+            identities.update,
         )
         self.list = to_streamed_response_wrapper(
-            runtimes.list,
+            identities.list,
         )
         self.delete = to_streamed_response_wrapper(
-            runtimes.delete,
+            identities.delete,
         )
 
 
-class AsyncRuntimesResourceWithStreamingResponse:
-    def __init__(self, runtimes: AsyncRuntimesResource) -> None:
-        self._runtimes = runtimes
+class AsyncIdentitiesResourceWithStreamingResponse:
+    def __init__(self, identities: AsyncIdentitiesResource) -> None:
+        self._identities = identities
 
         self.create = async_to_streamed_response_wrapper(
-            runtimes.create,
+            identities.create,
         )
         self.retrieve = async_to_streamed_response_wrapper(
-            runtimes.retrieve,
+            identities.retrieve,
         )
         self.update = async_to_streamed_response_wrapper(
-            runtimes.update,
+            identities.update,
         )
         self.list = async_to_streamed_response_wrapper(
-            runtimes.list,
+            identities.list,
         )
         self.delete = async_to_streamed_response_wrapper(
-            runtimes.delete,
+            identities.delete,
         )

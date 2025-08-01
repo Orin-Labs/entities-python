@@ -3,18 +3,18 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["ToolUpdateParams"]
 
 
 class ToolUpdateParams(TypedDict, total=False):
-    description: Required[str]
-
-    name: Required[str]
-
-    url: Required[str]
-
     adapter: Optional[str]
 
+    description: str
+
+    name: str
+
     parameters: object
+
+    url: str
