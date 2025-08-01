@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.12 (2025-08-01)
+
+Full Changelog: [v0.1.0-alpha.11...v0.1.0-alpha.12](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.11...v0.1.0-alpha.12)
+
+### Features
+
+* **api:** manual updates ([6ca0e0a](https://github.com/Orin-Labs/entities-python/commit/6ca0e0af7ed7b0c0c3f050fb69fe9f3ec3986c8b))
+
 ## 0.1.0-alpha.11 (2025-08-01)
 
 Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
