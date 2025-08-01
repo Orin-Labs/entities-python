@@ -35,7 +35,7 @@ class DrmInstancesResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Orin-Labs/entities-sdk#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/Orin-Labs/entities-python#accessing-raw-response-data-eg-headers
         """
         return DrmInstancesResourceWithRawResponse(self)
 
@@ -44,7 +44,7 @@ class DrmInstancesResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Orin-Labs/entities-sdk#with_streaming_response
+        For more information, see https://www.github.com/Orin-Labs/entities-python#with_streaming_response
         """
         return DrmInstancesResourceWithStreamingResponse(self)
 
@@ -318,7 +318,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/Orin-Labs/entities-sdk#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/Orin-Labs/entities-python#accessing-raw-response-data-eg-headers
         """
         return AsyncDrmInstancesResourceWithRawResponse(self)
 
@@ -327,7 +327,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/Orin-Labs/entities-sdk#with_streaming_response
+        For more information, see https://www.github.com/Orin-Labs/entities-python#with_streaming_response
         """
         return AsyncDrmInstancesResourceWithStreamingResponse(self)
 
