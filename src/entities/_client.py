@@ -29,6 +29,7 @@ from ._base_client import (
     AsyncAPIClient,
 )
 from .resources.orgs import orgs
+from .resources.tools import tools
 from .resources.memory import memory
 
 __all__ = [
@@ -46,6 +47,7 @@ __all__ = [
 class Entities(SyncAPIClient):
     memory: memory.MemoryResource
     orgs: orgs.OrgsResource
+    tools: tools.ToolsResource
     with_raw_response: EntitiesWithRawResponse
     with_streaming_response: EntitiesWithStreamedResponse
 
@@ -90,7 +92,7 @@ class Entities(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ENTITIES_BASE_URL")
         if base_url is None:
-            base_url = f"https://entities-api.onrender.com"
+            base_url = f"https://api.example.com"
 
         super().__init__(
             version=__version__,
@@ -105,6 +107,7 @@ class Entities(SyncAPIClient):
 
         self.memory = memory.MemoryResource(self)
         self.orgs = orgs.OrgsResource(self)
+        self.tools = tools.ToolsResource(self)
         self.with_raw_response = EntitiesWithRawResponse(self)
         self.with_streaming_response = EntitiesWithStreamedResponse(self)
 
@@ -216,6 +219,7 @@ class Entities(SyncAPIClient):
 class AsyncEntities(AsyncAPIClient):
     memory: memory.AsyncMemoryResource
     orgs: orgs.AsyncOrgsResource
+    tools: tools.AsyncToolsResource
     with_raw_response: AsyncEntitiesWithRawResponse
     with_streaming_response: AsyncEntitiesWithStreamedResponse
 
@@ -260,7 +264,7 @@ class AsyncEntities(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ENTITIES_BASE_URL")
         if base_url is None:
-            base_url = f"https://entities-api.onrender.com"
+            base_url = f"https://api.example.com"
 
         super().__init__(
             version=__version__,
@@ -275,6 +279,7 @@ class AsyncEntities(AsyncAPIClient):
 
         self.memory = memory.AsyncMemoryResource(self)
         self.orgs = orgs.AsyncOrgsResource(self)
+        self.tools = tools.AsyncToolsResource(self)
         self.with_raw_response = AsyncEntitiesWithRawResponse(self)
         self.with_streaming_response = AsyncEntitiesWithStreamedResponse(self)
 
@@ -387,24 +392,28 @@ class EntitiesWithRawResponse:
     def __init__(self, client: Entities) -> None:
         self.memory = memory.MemoryResourceWithRawResponse(client.memory)
         self.orgs = orgs.OrgsResourceWithRawResponse(client.orgs)
+        self.tools = tools.ToolsResourceWithRawResponse(client.tools)
 
 
 class AsyncEntitiesWithRawResponse:
     def __init__(self, client: AsyncEntities) -> None:
         self.memory = memory.AsyncMemoryResourceWithRawResponse(client.memory)
         self.orgs = orgs.AsyncOrgsResourceWithRawResponse(client.orgs)
+        self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
 
 
 class EntitiesWithStreamedResponse:
     def __init__(self, client: Entities) -> None:
         self.memory = memory.MemoryResourceWithStreamingResponse(client.memory)
         self.orgs = orgs.OrgsResourceWithStreamingResponse(client.orgs)
+        self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
 
 
 class AsyncEntitiesWithStreamedResponse:
     def __init__(self, client: AsyncEntities) -> None:
         self.memory = memory.AsyncMemoryResourceWithStreamingResponse(client.memory)
         self.orgs = orgs.AsyncOrgsResourceWithStreamingResponse(client.orgs)
+        self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
 
 
 Client = Entities

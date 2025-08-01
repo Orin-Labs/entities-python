@@ -1,5 +1,5 @@
 [project]
-name = "entities-python"
+name = "entities"
 version = "0.1.0-alpha.3"
 description = "The official Python library for the entities API"
 dynamic = ["readme"]
@@ -35,8 +35,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Orin-Labs/entities-python"
-Repository = "https://github.com/Orin-Labs/entities-python"
+Homepage = "https://github.com/stainless-sdks/entities-python"
+Repository = "https://github.com/stainless-sdks/entities-python"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
@@ -125,7 +125,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/Orin-Labs/entities-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/stainless-sdks/entities-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
