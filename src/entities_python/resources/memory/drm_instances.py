@@ -140,7 +140,7 @@ class DrmInstancesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._patch(
+        return self._put(
             f"/api/memory/drm-instances/{id}/",
             body=maybe_transform(
                 {
@@ -423,7 +423,7 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._patch(
+        return await self._put(
             f"/api/memory/drm-instances/{id}/",
             body=await async_maybe_transform(
                 {
