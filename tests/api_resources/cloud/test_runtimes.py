@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from entities_python import Entities, AsyncEntities
+from entities_python._utils import parse_datetime
 from entities_python.types.cloud import (
     RuntimeListResponse,
     RuntimeCreateResponse,
@@ -26,11 +27,19 @@ class TestRuntimes:
     @parametrize
     def test_method_create(self, client: Entities) -> None:
         runtime = client.cloud.runtimes.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                }
+            ],
         )
         assert_matches_type(RuntimeCreateResponse, runtime, path=["response"])
 
@@ -38,13 +47,24 @@ class TestRuntimes:
     @parametrize
     def test_method_create_with_all_params(self, client: Entities) -> None:
         runtime = client.cloud.runtimes.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+                "sleep_until": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "system_prompt": "system_prompt",
+                "timezone": "timezone",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
-            status="pending",
-            tools=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                    "adapter": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "parameters": {},
+                }
+            ],
         )
         assert_matches_type(RuntimeCreateResponse, runtime, path=["response"])
 
@@ -52,11 +72,19 @@ class TestRuntimes:
     @parametrize
     def test_raw_response_create(self, client: Entities) -> None:
         response = client.cloud.runtimes.with_raw_response.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -68,11 +96,19 @@ class TestRuntimes:
     @parametrize
     def test_streaming_response_create(self, client: Entities) -> None:
         with client.cloud.runtimes.with_streaming_response.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -137,13 +173,24 @@ class TestRuntimes:
     def test_method_update_with_all_params(self, client: Entities) -> None:
         runtime = client.cloud.runtimes.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+                "sleep_until": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "system_prompt": "system_prompt",
+                "timezone": "timezone",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
-            status="pending",
-            tools=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                    "adapter": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "parameters": {},
+                }
+            ],
         )
         assert_matches_type(RuntimeUpdateResponse, runtime, path=["response"])
 
@@ -261,11 +308,19 @@ class TestAsyncRuntimes:
     @parametrize
     async def test_method_create(self, async_client: AsyncEntities) -> None:
         runtime = await async_client.cloud.runtimes.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                }
+            ],
         )
         assert_matches_type(RuntimeCreateResponse, runtime, path=["response"])
 
@@ -273,13 +328,24 @@ class TestAsyncRuntimes:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncEntities) -> None:
         runtime = await async_client.cloud.runtimes.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+                "sleep_until": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "system_prompt": "system_prompt",
+                "timezone": "timezone",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
-            status="pending",
-            tools=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                    "adapter": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "parameters": {},
+                }
+            ],
         )
         assert_matches_type(RuntimeCreateResponse, runtime, path=["response"])
 
@@ -287,11 +353,19 @@ class TestAsyncRuntimes:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
         response = await async_client.cloud.runtimes.with_raw_response.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -303,11 +377,19 @@ class TestAsyncRuntimes:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncEntities) -> None:
         async with async_client.cloud.runtimes.with_streaming_response.create(
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -372,13 +454,24 @@ class TestAsyncRuntimes:
     async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
         runtime = await async_client.cloud.runtimes.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            agent_key="agent_key",
-            current_turn=-2147483648,
+            identity={
+                "memory": 0,
+                "name": "name",
+                "sleep_until": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "system_prompt": "system_prompt",
+                "timezone": "timezone",
+            },
             max_turns=-2147483648,
-            memory=0,
             model="model",
-            status="pending",
-            tools=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            tools=[
+                {
+                    "description": "description",
+                    "name": "name",
+                    "url": "https://example.com",
+                    "adapter": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "parameters": {},
+                }
+            ],
         )
         assert_matches_type(RuntimeUpdateResponse, runtime, path=["response"])
 

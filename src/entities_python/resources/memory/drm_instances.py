@@ -53,7 +53,6 @@ class DrmInstancesResource(SyncAPIResource):
         *,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,7 +76,6 @@ class DrmInstancesResource(SyncAPIResource):
                 {
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "timezone": timezone,
                 },
                 drm_instance_create_params.DrmInstanceCreateParams,
             ),
@@ -122,7 +120,6 @@ class DrmInstancesResource(SyncAPIResource):
         *,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -146,7 +143,6 @@ class DrmInstancesResource(SyncAPIResource):
                 {
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "timezone": timezone,
                 },
                 drm_instance_update_params.DrmInstanceUpdateParams,
             ),
@@ -336,7 +332,6 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
         *,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -360,7 +355,6 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
                 {
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "timezone": timezone,
                 },
                 drm_instance_create_params.DrmInstanceCreateParams,
             ),
@@ -405,7 +399,6 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
         *,
         name: str | NotGiven = NOT_GIVEN,
         summarizer_model: str | NotGiven = NOT_GIVEN,
-        timezone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -429,7 +422,6 @@ class AsyncDrmInstancesResource(AsyncAPIResource):
                 {
                     "name": name,
                     "summarizer_model": summarizer_model,
-                    "timezone": timezone,
                 },
                 drm_instance_update_params.DrmInstanceUpdateParams,
             ),
