@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-08-01)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** manual updates ([da558bb](https://github.com/Orin-Labs/entities-python/commit/da558bb309455bd31042434b7b05a568b205c0eb))
+
+
+### Chores
+
+* update SDK settings ([1e4fc87](https://github.com/Orin-Labs/entities-python/commit/1e4fc876212389b86bddf98a0795b4f18b51aed0))
+
 ## 0.1.0-alpha.4 (2025-08-01)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
