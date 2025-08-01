@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 from ..._models import BaseModel
@@ -15,6 +15,8 @@ class Identity(BaseModel):
 
     memory: int
 
+    model: str
+
     name: str
 
     organization: str
@@ -24,3 +26,5 @@ class Identity(BaseModel):
     system_prompt: Optional[str] = None
 
     timezone: Optional[str] = None
+
+    tools: Optional[List[str]] = None
