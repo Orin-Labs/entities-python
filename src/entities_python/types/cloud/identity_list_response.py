@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .runtime import Runtime
+from .identity import Identity
 
-__all__ = ["RuntimeListResponse"]
+__all__ = ["IdentityListResponse"]
 
-RuntimeListResponse: TypeAlias = List[Runtime]
+IdentityListResponse: TypeAlias = List[Identity]

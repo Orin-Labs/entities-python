@@ -1,34 +1,17 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 from datetime import datetime
-from typing_extensions import Literal
 
+from .identity import Identity
 from ..._models import BaseModel
+from .status_enum import StatusEnum
 from ..toolbox.tool import Tool
 
-__all__ = ["RuntimeUpdateResponse", "Identity"]
+__all__ = ["Runtime"]
 
 
-class Identity(BaseModel):
-    id: str
-
-    created_at: datetime
-
-    memory: int
-
-    name: str
-
-    organization: str
-
-    sleep_until: Optional[datetime] = None
-
-    system_prompt: Optional[str] = None
-
-    timezone: Optional[str] = None
-
-
-class RuntimeUpdateResponse(BaseModel):
+class Runtime(BaseModel):
     id: str
 
     created_at: datetime
@@ -41,7 +24,7 @@ class RuntimeUpdateResponse(BaseModel):
 
     model: str
 
-    status: Literal["created", "pending", "running", "completed", "failed"]
+    status: StatusEnum
     """
     - `created` - Created
     - `pending` - Pending

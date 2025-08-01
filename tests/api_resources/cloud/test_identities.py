@@ -9,82 +9,95 @@ import pytest
 
 from tests.utils import assert_matches_type
 from entities_python import Entities, AsyncEntities
-from entities_python.types.toolbox import Adapter, AdapterListResponse
+from entities_python._utils import parse_datetime
+from entities_python.types.cloud import Identity, IdentityListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestAdapters:
+class TestIdentities:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.create(
-            description="description",
+        identity = client.cloud.identities.create(
+            memory=0,
             name="name",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: Entities) -> None:
+        identity = client.cloud.identities.create(
+            memory=0,
+            name="name",
+            sleep_until=parse_datetime("2019-12-27T18:11:19.117Z"),
+            system_prompt="system_prompt",
+            timezone="timezone",
+        )
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Entities) -> None:
-        response = client.toolbox.adapters.with_raw_response.create(
-            description="description",
+        response = client.cloud.identities.with_raw_response.create(
+            memory=0,
             name="name",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = response.parse()
-        assert_matches_type(Adapter, adapter, path=["response"])
+        identity = response.parse()
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Entities) -> None:
-        with client.toolbox.adapters.with_streaming_response.create(
-            description="description",
+        with client.cloud.identities.with_streaming_response.create(
+            memory=0,
             name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = response.parse()
-            assert_matches_type(Adapter, adapter, path=["response"])
+            identity = response.parse()
+            assert_matches_type(Identity, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.retrieve(
+        identity = client.cloud.identities.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Entities) -> None:
-        response = client.toolbox.adapters.with_raw_response.retrieve(
+        response = client.cloud.identities.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = response.parse()
-        assert_matches_type(Adapter, adapter, path=["response"])
+        identity = response.parse()
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Entities) -> None:
-        with client.toolbox.adapters.with_streaming_response.retrieve(
+        with client.cloud.identities.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = response.parse()
-            assert_matches_type(Adapter, adapter, path=["response"])
+            identity = response.parse()
+            assert_matches_type(Identity, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -92,51 +105,54 @@ class TestAdapters:
     @parametrize
     def test_path_params_retrieve(self, client: Entities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.toolbox.adapters.with_raw_response.retrieve(
+            client.cloud.identities.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_update(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.update(
+        identity = client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_update_with_all_params(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.update(
+        identity = client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            description="description",
+            memory=0,
             name="name",
+            sleep_until=parse_datetime("2019-12-27T18:11:19.117Z"),
+            system_prompt="system_prompt",
+            timezone="timezone",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_update(self, client: Entities) -> None:
-        response = client.toolbox.adapters.with_raw_response.update(
+        response = client.cloud.identities.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = response.parse()
-        assert_matches_type(Adapter, adapter, path=["response"])
+        identity = response.parse()
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update(self, client: Entities) -> None:
-        with client.toolbox.adapters.with_streaming_response.update(
+        with client.cloud.identities.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = response.parse()
-            assert_matches_type(Adapter, adapter, path=["response"])
+            identity = response.parse()
+            assert_matches_type(Identity, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -144,69 +160,69 @@ class TestAdapters:
     @parametrize
     def test_path_params_update(self, client: Entities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.toolbox.adapters.with_raw_response.update(
+            client.cloud.identities.with_raw_response.update(
                 id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.list()
-        assert_matches_type(AdapterListResponse, adapter, path=["response"])
+        identity = client.cloud.identities.list()
+        assert_matches_type(IdentityListResponse, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Entities) -> None:
-        response = client.toolbox.adapters.with_raw_response.list()
+        response = client.cloud.identities.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = response.parse()
-        assert_matches_type(AdapterListResponse, adapter, path=["response"])
+        identity = response.parse()
+        assert_matches_type(IdentityListResponse, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Entities) -> None:
-        with client.toolbox.adapters.with_streaming_response.list() as response:
+        with client.cloud.identities.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = response.parse()
-            assert_matches_type(AdapterListResponse, adapter, path=["response"])
+            identity = response.parse()
+            assert_matches_type(IdentityListResponse, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.delete(
+        identity = client.cloud.identities.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert adapter is None
+        assert identity is None
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Entities) -> None:
-        response = client.toolbox.adapters.with_raw_response.delete(
+        response = client.cloud.identities.with_raw_response.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = response.parse()
-        assert adapter is None
+        identity = response.parse()
+        assert identity is None
 
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Entities) -> None:
-        with client.toolbox.adapters.with_streaming_response.delete(
+        with client.cloud.identities.with_streaming_response.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = response.parse()
-            assert adapter is None
+            identity = response.parse()
+            assert identity is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -214,12 +230,12 @@ class TestAdapters:
     @parametrize
     def test_path_params_delete(self, client: Entities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.toolbox.adapters.with_raw_response.delete(
+            client.cloud.identities.with_raw_response.delete(
                 "",
             )
 
 
-class TestAsyncAdapters:
+class TestAsyncIdentities:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
@@ -227,71 +243,83 @@ class TestAsyncAdapters:
     @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.create(
-            description="description",
+        identity = await async_client.cloud.identities.create(
+            memory=0,
             name="name",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncEntities) -> None:
+        identity = await async_client.cloud.identities.create(
+            memory=0,
+            name="name",
+            sleep_until=parse_datetime("2019-12-27T18:11:19.117Z"),
+            system_prompt="system_prompt",
+            timezone="timezone",
+        )
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
-        response = await async_client.toolbox.adapters.with_raw_response.create(
-            description="description",
+        response = await async_client.cloud.identities.with_raw_response.create(
+            memory=0,
             name="name",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = await response.parse()
-        assert_matches_type(Adapter, adapter, path=["response"])
+        identity = await response.parse()
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncEntities) -> None:
-        async with async_client.toolbox.adapters.with_streaming_response.create(
-            description="description",
+        async with async_client.cloud.identities.with_streaming_response.create(
+            memory=0,
             name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = await response.parse()
-            assert_matches_type(Adapter, adapter, path=["response"])
+            identity = await response.parse()
+            assert_matches_type(Identity, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.retrieve(
+        identity = await async_client.cloud.identities.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEntities) -> None:
-        response = await async_client.toolbox.adapters.with_raw_response.retrieve(
+        response = await async_client.cloud.identities.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = await response.parse()
-        assert_matches_type(Adapter, adapter, path=["response"])
+        identity = await response.parse()
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEntities) -> None:
-        async with async_client.toolbox.adapters.with_streaming_response.retrieve(
+        async with async_client.cloud.identities.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = await response.parse()
-            assert_matches_type(Adapter, adapter, path=["response"])
+            identity = await response.parse()
+            assert_matches_type(Identity, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -299,51 +327,54 @@ class TestAsyncAdapters:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncEntities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.toolbox.adapters.with_raw_response.retrieve(
+            await async_client.cloud.identities.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_update(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.update(
+        identity = await async_client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.update(
+        identity = await async_client.cloud.identities.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            description="description",
+            memory=0,
             name="name",
+            sleep_until=parse_datetime("2019-12-27T18:11:19.117Z"),
+            system_prompt="system_prompt",
+            timezone="timezone",
         )
-        assert_matches_type(Adapter, adapter, path=["response"])
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
-        response = await async_client.toolbox.adapters.with_raw_response.update(
+        response = await async_client.cloud.identities.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = await response.parse()
-        assert_matches_type(Adapter, adapter, path=["response"])
+        identity = await response.parse()
+        assert_matches_type(Identity, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
-        async with async_client.toolbox.adapters.with_streaming_response.update(
+        async with async_client.cloud.identities.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = await response.parse()
-            assert_matches_type(Adapter, adapter, path=["response"])
+            identity = await response.parse()
+            assert_matches_type(Identity, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -351,69 +382,69 @@ class TestAsyncAdapters:
     @parametrize
     async def test_path_params_update(self, async_client: AsyncEntities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.toolbox.adapters.with_raw_response.update(
+            await async_client.cloud.identities.with_raw_response.update(
                 id="",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.list()
-        assert_matches_type(AdapterListResponse, adapter, path=["response"])
+        identity = await async_client.cloud.identities.list()
+        assert_matches_type(IdentityListResponse, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncEntities) -> None:
-        response = await async_client.toolbox.adapters.with_raw_response.list()
+        response = await async_client.cloud.identities.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = await response.parse()
-        assert_matches_type(AdapterListResponse, adapter, path=["response"])
+        identity = await response.parse()
+        assert_matches_type(IdentityListResponse, identity, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncEntities) -> None:
-        async with async_client.toolbox.adapters.with_streaming_response.list() as response:
+        async with async_client.cloud.identities.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = await response.parse()
-            assert_matches_type(AdapterListResponse, adapter, path=["response"])
+            identity = await response.parse()
+            assert_matches_type(IdentityListResponse, identity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.delete(
+        identity = await async_client.cloud.identities.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert adapter is None
+        assert identity is None
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncEntities) -> None:
-        response = await async_client.toolbox.adapters.with_raw_response.delete(
+        response = await async_client.cloud.identities.with_raw_response.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        adapter = await response.parse()
-        assert adapter is None
+        identity = await response.parse()
+        assert identity is None
 
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncEntities) -> None:
-        async with async_client.toolbox.adapters.with_streaming_response.delete(
+        async with async_client.cloud.identities.with_streaming_response.delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            adapter = await response.parse()
-            assert adapter is None
+            identity = await response.parse()
+            assert identity is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -421,6 +452,6 @@ class TestAsyncAdapters:
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncEntities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.toolbox.adapters.with_raw_response.delete(
+            await async_client.cloud.identities.with_raw_response.delete(
                 "",
             )
