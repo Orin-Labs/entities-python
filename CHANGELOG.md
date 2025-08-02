@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.13 (2025-08-02)
+
+Full Changelog: [v0.1.0-alpha.12...v0.1.0-alpha.13](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.12...v0.1.0-alpha.13)
+
+### Chores
+
+* fix package name ([d9de037](https://github.com/Orin-Labs/entities-python/commit/d9de037f1001854ec069211b3fe762307d3ccf9a))
+
 ## 0.1.0-alpha.12 (2025-08-01)
 
 Full Changelog: [v0.1.0-alpha.11...v0.1.0-alpha.12](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.11...v0.1.0-alpha.12)
