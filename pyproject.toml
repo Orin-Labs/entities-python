@@ -1,5 +1,5 @@
 [project]
-name = "entities_python"
+name = "entities-python"
 version = "0.1.0-alpha.12"
 description = "The official Python library for the entities API"
 dynamic = ["readme"]
