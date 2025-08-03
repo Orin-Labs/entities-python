@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import List, Union
 from datetime import datetime
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -12,13 +12,13 @@ __all__ = ["IdentityUpdateParams"]
 
 
 class IdentityUpdateParams(TypedDict, total=False):
+    memory: Required[int]
+
+    model: Required[str]
+
+    name: Required[str]
+
     locked_at: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
-
-    memory: int
-
-    model: str
-
-    name: str
 
     sleep_until: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
 

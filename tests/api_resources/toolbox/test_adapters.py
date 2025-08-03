@@ -101,14 +101,6 @@ class TestAdapters:
     def test_method_update(self, client: Entities) -> None:
         adapter = client.toolbox.adapters.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(Adapter, adapter, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_with_all_params(self, client: Entities) -> None:
-        adapter = client.toolbox.adapters.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
         )
@@ -119,6 +111,8 @@ class TestAdapters:
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.toolbox.adapters.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -131,6 +125,8 @@ class TestAdapters:
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.toolbox.adapters.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -146,6 +142,8 @@ class TestAdapters:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.toolbox.adapters.with_raw_response.update(
                 id="",
+                description="description",
+                name="name",
             )
 
     @pytest.mark.skip()
@@ -308,14 +306,6 @@ class TestAsyncAdapters:
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         adapter = await async_client.toolbox.adapters.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(Adapter, adapter, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
-        adapter = await async_client.toolbox.adapters.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
         )
@@ -326,6 +316,8 @@ class TestAsyncAdapters:
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.adapters.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -338,6 +330,8 @@ class TestAsyncAdapters:
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.toolbox.adapters.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -353,6 +347,8 @@ class TestAsyncAdapters:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.toolbox.adapters.with_raw_response.update(
                 id="",
+                description="description",
+                name="name",
             )
 
     @pytest.mark.skip()

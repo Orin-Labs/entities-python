@@ -131,7 +131,7 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._patch(
+        return self._put(
             f"/api/orgs/api-keys/{id}/",
             body=maybe_transform(
                 {
@@ -304,7 +304,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._patch(
+        return await self._put(
             f"/api/orgs/api-keys/{id}/",
             body=await async_maybe_transform(
                 {
