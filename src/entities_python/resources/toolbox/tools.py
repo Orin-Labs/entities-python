@@ -122,11 +122,11 @@ class ToolsResource(SyncAPIResource):
         self,
         id: str,
         *,
+        description: str,
+        name: str,
+        url: str,
         adapter: Optional[str] | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
         parameters: object | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -146,15 +146,15 @@ class ToolsResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._patch(
+        return self._put(
             f"/api/toolbox/tools/{id}/",
             body=maybe_transform(
                 {
-                    "adapter": adapter,
                     "description": description,
                     "name": name,
-                    "parameters": parameters,
                     "url": url,
+                    "adapter": adapter,
+                    "parameters": parameters,
                 },
                 tool_update_params.ToolUpdateParams,
             ),
@@ -313,11 +313,11 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        description: str,
+        name: str,
+        url: str,
         adapter: Optional[str] | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
         parameters: object | NotGiven = NOT_GIVEN,
-        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -337,15 +337,15 @@ class AsyncToolsResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._patch(
+        return await self._put(
             f"/api/toolbox/tools/{id}/",
             body=await async_maybe_transform(
                 {
-                    "adapter": adapter,
                     "description": description,
                     "name": name,
-                    "parameters": parameters,
                     "url": url,
+                    "adapter": adapter,
+                    "parameters": parameters,
                 },
                 tool_update_params.ToolUpdateParams,
             ),

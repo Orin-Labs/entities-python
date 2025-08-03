@@ -116,6 +116,9 @@ class TestTools:
     def test_method_update(self, client: Entities) -> None:
         tool = client.toolbox.tools.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
+            url="https://example.com",
         )
         assert_matches_type(Tool, tool, path=["response"])
 
@@ -124,11 +127,11 @@ class TestTools:
     def test_method_update_with_all_params(self, client: Entities) -> None:
         tool = client.toolbox.tools.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
+            adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
 
@@ -137,6 +140,9 @@ class TestTools:
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.toolbox.tools.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
+            url="https://example.com",
         )
 
         assert response.is_closed is True
@@ -149,6 +155,9 @@ class TestTools:
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.toolbox.tools.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
+            url="https://example.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -164,6 +173,9 @@ class TestTools:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.toolbox.tools.with_raw_response.update(
                 id="",
+                description="description",
+                name="name",
+                url="https://example.com",
             )
 
     @pytest.mark.skip()
@@ -341,6 +353,9 @@ class TestAsyncTools:
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         tool = await async_client.toolbox.tools.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
+            url="https://example.com",
         )
         assert_matches_type(Tool, tool, path=["response"])
 
@@ -349,11 +364,11 @@ class TestAsyncTools:
     async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
         tool = await async_client.toolbox.tools.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            parameters={},
             url="https://example.com",
+            adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
 
@@ -362,6 +377,9 @@ class TestAsyncTools:
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.tools.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
+            url="https://example.com",
         )
 
         assert response.is_closed is True
@@ -374,6 +392,9 @@ class TestAsyncTools:
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.toolbox.tools.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="description",
+            name="name",
+            url="https://example.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -389,6 +410,9 @@ class TestAsyncTools:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.toolbox.tools.with_raw_response.update(
                 id="",
+                description="description",
+                name="name",
+                url="https://example.com",
             )
 
     @pytest.mark.skip()

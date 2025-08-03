@@ -47,6 +47,7 @@ class RuntimesResource(SyncAPIResource):
         *,
         identity: str,
         max_turns: int,
+        force_run: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,6 +71,7 @@ class RuntimesResource(SyncAPIResource):
                 {
                     "identity": identity,
                     "max_turns": max_turns,
+                    "force_run": force_run,
                 },
                 runtime_create_params.RuntimeCreateParams,
             ),
@@ -114,8 +116,9 @@ class RuntimesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        identity: str,
-        max_turns: int,
+        force_run: bool | NotGiven = NOT_GIVEN,
+        identity: str | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,10 +138,11 @@ class RuntimesResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._put(
+        return self._patch(
             f"/api/cloud/runtimes/{id}/",
             body=maybe_transform(
                 {
+                    "force_run": force_run,
                     "identity": identity,
                     "max_turns": max_turns,
                 },
@@ -226,6 +230,7 @@ class AsyncRuntimesResource(AsyncAPIResource):
         *,
         identity: str,
         max_turns: int,
+        force_run: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -249,6 +254,7 @@ class AsyncRuntimesResource(AsyncAPIResource):
                 {
                     "identity": identity,
                     "max_turns": max_turns,
+                    "force_run": force_run,
                 },
                 runtime_create_params.RuntimeCreateParams,
             ),
@@ -293,8 +299,9 @@ class AsyncRuntimesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        identity: str,
-        max_turns: int,
+        force_run: bool | NotGiven = NOT_GIVEN,
+        identity: str | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -314,10 +321,11 @@ class AsyncRuntimesResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._put(
+        return await self._patch(
             f"/api/cloud/runtimes/{id}/",
             body=await async_maybe_transform(
                 {
+                    "force_run": force_run,
                     "identity": identity,
                     "max_turns": max_turns,
                 },

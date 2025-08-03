@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["RuntimeUpdateParams"]
 
 
 class RuntimeUpdateParams(TypedDict, total=False):
-    identity: Required[str]
+    force_run: bool
 
-    max_turns: Required[int]
+    identity: str
+
+    max_turns: int
