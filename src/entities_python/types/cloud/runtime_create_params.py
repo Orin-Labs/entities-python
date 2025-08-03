@@ -11,3 +11,5 @@ class RuntimeCreateParams(TypedDict, total=False):
     identity: Required[str]
 
     max_turns: Required[int]
+
+    force_run: bool

@@ -28,6 +28,16 @@ class TestRuntimes:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create_with_all_params(self, client: Entities) -> None:
+        runtime = client.cloud.runtimes.create(
+            identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            max_turns=-2147483648,
+            force_run=True,
+        )
+        assert_matches_type(Runtime, runtime, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_create(self, client: Entities) -> None:
         response = client.cloud.runtimes.with_raw_response.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -101,6 +111,15 @@ class TestRuntimes:
     def test_method_update(self, client: Entities) -> None:
         runtime = client.cloud.runtimes.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(Runtime, runtime, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Entities) -> None:
+        runtime = client.cloud.runtimes.update(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            force_run=True,
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             max_turns=-2147483648,
         )
@@ -111,8 +130,6 @@ class TestRuntimes:
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.cloud.runtimes.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         )
 
         assert response.is_closed is True
@@ -125,8 +142,6 @@ class TestRuntimes:
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.cloud.runtimes.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -142,8 +157,6 @@ class TestRuntimes:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.cloud.runtimes.with_raw_response.update(
                 id="",
-                identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                max_turns=-2147483648,
             )
 
     @pytest.mark.skip()
@@ -233,6 +246,16 @@ class TestAsyncRuntimes:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncEntities) -> None:
+        runtime = await async_client.cloud.runtimes.create(
+            identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            max_turns=-2147483648,
+            force_run=True,
+        )
+        assert_matches_type(Runtime, runtime, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
         response = await async_client.cloud.runtimes.with_raw_response.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -306,6 +329,15 @@ class TestAsyncRuntimes:
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         runtime = await async_client.cloud.runtimes.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(Runtime, runtime, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
+        runtime = await async_client.cloud.runtimes.update(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            force_run=True,
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             max_turns=-2147483648,
         )
@@ -316,8 +348,6 @@ class TestAsyncRuntimes:
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.cloud.runtimes.with_raw_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         )
 
         assert response.is_closed is True
@@ -330,8 +360,6 @@ class TestAsyncRuntimes:
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.cloud.runtimes.with_streaming_response.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -347,8 +375,6 @@ class TestAsyncRuntimes:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.cloud.runtimes.with_raw_response.update(
                 id="",
-                identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                max_turns=-2147483648,
             )
 
     @pytest.mark.skip()
