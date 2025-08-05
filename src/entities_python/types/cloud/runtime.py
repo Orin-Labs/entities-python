@@ -18,8 +18,6 @@ class Runtime(BaseModel):
 
     identity: str
 
-    max_turns: int
-
     status: StatusEnum
     """
     - `created` - Created
@@ -30,3 +28,5 @@ class Runtime(BaseModel):
     """
 
     force_run: Optional[bool] = None
+
+    max_turns: Optional[int] = None

@@ -22,7 +22,6 @@ class TestRuntimes:
     def test_method_create(self, client: Entities) -> None:
         runtime = client.cloud.runtimes.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         )
         assert_matches_type(Runtime, runtime, path=["response"])
 
@@ -31,8 +30,8 @@ class TestRuntimes:
     def test_method_create_with_all_params(self, client: Entities) -> None:
         runtime = client.cloud.runtimes.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
             force_run=True,
+            max_turns=-2147483648,
         )
         assert_matches_type(Runtime, runtime, path=["response"])
 
@@ -41,7 +40,6 @@ class TestRuntimes:
     def test_raw_response_create(self, client: Entities) -> None:
         response = client.cloud.runtimes.with_raw_response.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         )
 
         assert response.is_closed is True
@@ -54,7 +52,6 @@ class TestRuntimes:
     def test_streaming_response_create(self, client: Entities) -> None:
         with client.cloud.runtimes.with_streaming_response.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -240,7 +237,6 @@ class TestAsyncRuntimes:
     async def test_method_create(self, async_client: AsyncEntities) -> None:
         runtime = await async_client.cloud.runtimes.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         )
         assert_matches_type(Runtime, runtime, path=["response"])
 
@@ -249,8 +245,8 @@ class TestAsyncRuntimes:
     async def test_method_create_with_all_params(self, async_client: AsyncEntities) -> None:
         runtime = await async_client.cloud.runtimes.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
             force_run=True,
+            max_turns=-2147483648,
         )
         assert_matches_type(Runtime, runtime, path=["response"])
 
@@ -259,7 +255,6 @@ class TestAsyncRuntimes:
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
         response = await async_client.cloud.runtimes.with_raw_response.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         )
 
         assert response.is_closed is True
@@ -272,7 +267,6 @@ class TestAsyncRuntimes:
     async def test_streaming_response_create(self, async_client: AsyncEntities) -> None:
         async with async_client.cloud.runtimes.with_streaming_response.create(
             identity="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            max_turns=-2147483648,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
