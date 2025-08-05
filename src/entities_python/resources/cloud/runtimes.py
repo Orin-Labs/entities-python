@@ -46,8 +46,8 @@ class RuntimesResource(SyncAPIResource):
         self,
         *,
         identity: str,
-        max_turns: int,
         force_run: bool | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,8 +70,8 @@ class RuntimesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "identity": identity,
-                    "max_turns": max_turns,
                     "force_run": force_run,
+                    "max_turns": max_turns,
                 },
                 runtime_create_params.RuntimeCreateParams,
             ),
@@ -229,8 +229,8 @@ class AsyncRuntimesResource(AsyncAPIResource):
         self,
         *,
         identity: str,
-        max_turns: int,
         force_run: bool | NotGiven = NOT_GIVEN,
+        max_turns: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -253,8 +253,8 @@ class AsyncRuntimesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "identity": identity,
-                    "max_turns": max_turns,
                     "force_run": force_run,
+                    "max_turns": max_turns,
                 },
                 runtime_create_params.RuntimeCreateParams,
             ),
