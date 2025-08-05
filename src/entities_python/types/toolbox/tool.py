@@ -20,4 +20,6 @@ class Tool(BaseModel):
 
     adapter: Optional[str] = None
 
+    detail_url: Optional[str] = None
+
     parameters: Optional[object] = None
