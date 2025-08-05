@@ -35,6 +35,7 @@ class TestTools:
             name="name",
             url="https://example.com",
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            detail_url="https://example.com",
             parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
@@ -131,6 +132,7 @@ class TestTools:
             name="name",
             url="https://example.com",
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            detail_url="https://example.com",
             parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
@@ -272,6 +274,7 @@ class TestAsyncTools:
             name="name",
             url="https://example.com",
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            detail_url="https://example.com",
             parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
@@ -368,6 +371,7 @@ class TestAsyncTools:
             name="name",
             url="https://example.com",
             adapter="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            detail_url="https://example.com",
             parameters={},
         )
         assert_matches_type(Tool, tool, path=["response"])
