@@ -17,4 +17,6 @@ class ToolUpdateParams(TypedDict, total=False):
 
     adapter: Optional[str]
 
+    detail_url: str
+
     parameters: object
