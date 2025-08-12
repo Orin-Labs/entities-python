@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAdapters:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Entities) -> None:
         adapter = client.toolbox.adapters.create(
@@ -26,7 +26,7 @@ class TestAdapters:
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Entities) -> None:
         response = client.toolbox.adapters.with_raw_response.create(
@@ -39,7 +39,7 @@ class TestAdapters:
         adapter = response.parse()
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Entities) -> None:
         with client.toolbox.adapters.with_streaming_response.create(
@@ -54,7 +54,7 @@ class TestAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Entities) -> None:
         adapter = client.toolbox.adapters.retrieve(
@@ -62,7 +62,7 @@ class TestAdapters:
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Entities) -> None:
         response = client.toolbox.adapters.with_raw_response.retrieve(
@@ -74,7 +74,7 @@ class TestAdapters:
         adapter = response.parse()
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Entities) -> None:
         with client.toolbox.adapters.with_streaming_response.retrieve(
@@ -88,7 +88,7 @@ class TestAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Entities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -96,7 +96,7 @@ class TestAdapters:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Entities) -> None:
         adapter = client.toolbox.adapters.update(
@@ -106,7 +106,7 @@ class TestAdapters:
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.toolbox.adapters.with_raw_response.update(
@@ -120,7 +120,7 @@ class TestAdapters:
         adapter = response.parse()
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.toolbox.adapters.with_streaming_response.update(
@@ -136,7 +136,7 @@ class TestAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Entities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -146,13 +146,13 @@ class TestAdapters:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Entities) -> None:
         adapter = client.toolbox.adapters.list()
         assert_matches_type(AdapterListResponse, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Entities) -> None:
         response = client.toolbox.adapters.with_raw_response.list()
@@ -162,7 +162,7 @@ class TestAdapters:
         adapter = response.parse()
         assert_matches_type(AdapterListResponse, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Entities) -> None:
         with client.toolbox.adapters.with_streaming_response.list() as response:
@@ -174,7 +174,7 @@ class TestAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Entities) -> None:
         adapter = client.toolbox.adapters.delete(
@@ -182,7 +182,7 @@ class TestAdapters:
         )
         assert adapter is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Entities) -> None:
         response = client.toolbox.adapters.with_raw_response.delete(
@@ -194,7 +194,7 @@ class TestAdapters:
         adapter = response.parse()
         assert adapter is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Entities) -> None:
         with client.toolbox.adapters.with_streaming_response.delete(
@@ -208,7 +208,7 @@ class TestAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Entities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -222,7 +222,7 @@ class TestAsyncAdapters:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncEntities) -> None:
         adapter = await async_client.toolbox.adapters.create(
@@ -231,7 +231,7 @@ class TestAsyncAdapters:
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.adapters.with_raw_response.create(
@@ -244,7 +244,7 @@ class TestAsyncAdapters:
         adapter = await response.parse()
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncEntities) -> None:
         async with async_client.toolbox.adapters.with_streaming_response.create(
@@ -259,7 +259,7 @@ class TestAsyncAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEntities) -> None:
         adapter = await async_client.toolbox.adapters.retrieve(
@@ -267,7 +267,7 @@ class TestAsyncAdapters:
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.adapters.with_raw_response.retrieve(
@@ -279,7 +279,7 @@ class TestAsyncAdapters:
         adapter = await response.parse()
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEntities) -> None:
         async with async_client.toolbox.adapters.with_streaming_response.retrieve(
@@ -293,7 +293,7 @@ class TestAsyncAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncEntities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -301,7 +301,7 @@ class TestAsyncAdapters:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         adapter = await async_client.toolbox.adapters.update(
@@ -311,7 +311,7 @@ class TestAsyncAdapters:
         )
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.adapters.with_raw_response.update(
@@ -325,7 +325,7 @@ class TestAsyncAdapters:
         adapter = await response.parse()
         assert_matches_type(Adapter, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.toolbox.adapters.with_streaming_response.update(
@@ -341,7 +341,7 @@ class TestAsyncAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncEntities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -351,13 +351,13 @@ class TestAsyncAdapters:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncEntities) -> None:
         adapter = await async_client.toolbox.adapters.list()
         assert_matches_type(AdapterListResponse, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.adapters.with_raw_response.list()
@@ -367,7 +367,7 @@ class TestAsyncAdapters:
         adapter = await response.parse()
         assert_matches_type(AdapterListResponse, adapter, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncEntities) -> None:
         async with async_client.toolbox.adapters.with_streaming_response.list() as response:
@@ -379,7 +379,7 @@ class TestAsyncAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncEntities) -> None:
         adapter = await async_client.toolbox.adapters.delete(
@@ -387,7 +387,7 @@ class TestAsyncAdapters:
         )
         assert adapter is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncEntities) -> None:
         response = await async_client.toolbox.adapters.with_raw_response.delete(
@@ -399,7 +399,7 @@ class TestAsyncAdapters:
         adapter = await response.parse()
         assert adapter is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncEntities) -> None:
         async with async_client.toolbox.adapters.with_streaming_response.delete(
@@ -413,7 +413,7 @@ class TestAsyncAdapters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncEntities) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):

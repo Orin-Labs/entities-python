@@ -24,13 +24,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestDrmInstances:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.create()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.create(
@@ -39,7 +39,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.create()
@@ -49,7 +49,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.create() as response:
@@ -61,7 +61,7 @@ class TestDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.retrieve(
@@ -69,7 +69,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.retrieve(
@@ -81,7 +81,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.retrieve(
@@ -95,7 +95,7 @@ class TestDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.update(
@@ -103,7 +103,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.update(
@@ -113,7 +113,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.update(
@@ -125,7 +125,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.update(
@@ -139,13 +139,13 @@ class TestDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.list()
         assert_matches_type(DrmInstanceListResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.list()
@@ -155,7 +155,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert_matches_type(DrmInstanceListResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.list() as response:
@@ -167,7 +167,7 @@ class TestDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.delete(
@@ -175,7 +175,7 @@ class TestDrmInstances:
         )
         assert drm_instance is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.delete(
@@ -187,7 +187,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert drm_instance is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.delete(
@@ -201,7 +201,7 @@ class TestDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get_memory_context(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.get_memory_context(
@@ -209,7 +209,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get_memory_context(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.get_memory_context(
@@ -221,7 +221,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get_memory_context(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.get_memory_context(
@@ -235,7 +235,7 @@ class TestDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get_messages(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.get_messages(
@@ -243,7 +243,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get_messages(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.get_messages(
@@ -255,7 +255,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get_messages(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.get_messages(
@@ -269,7 +269,7 @@ class TestDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_log_messages(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.log_messages(
@@ -278,7 +278,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_log_messages_with_all_params(self, client: Entities) -> None:
         drm_instance = client.memory.drm_instances.log_messages(
@@ -288,7 +288,7 @@ class TestDrmInstances:
         )
         assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_log_messages(self, client: Entities) -> None:
         response = client.memory.drm_instances.with_raw_response.log_messages(
@@ -301,7 +301,7 @@ class TestDrmInstances:
         drm_instance = response.parse()
         assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_log_messages(self, client: Entities) -> None:
         with client.memory.drm_instances.with_streaming_response.log_messages(
@@ -322,13 +322,13 @@ class TestAsyncDrmInstances:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.create()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.create(
@@ -337,7 +337,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.create()
@@ -347,7 +347,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.create() as response:
@@ -359,7 +359,7 @@ class TestAsyncDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.retrieve(
@@ -367,7 +367,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.retrieve(
@@ -379,7 +379,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.retrieve(
@@ -393,7 +393,7 @@ class TestAsyncDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.update(
@@ -401,7 +401,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.update(
@@ -411,7 +411,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.update(
@@ -423,7 +423,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert_matches_type(DrmInstance, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.update(
@@ -437,13 +437,13 @@ class TestAsyncDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.list()
         assert_matches_type(DrmInstanceListResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.list()
@@ -453,7 +453,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert_matches_type(DrmInstanceListResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.list() as response:
@@ -465,7 +465,7 @@ class TestAsyncDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.delete(
@@ -473,7 +473,7 @@ class TestAsyncDrmInstances:
         )
         assert drm_instance is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.delete(
@@ -485,7 +485,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert drm_instance is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.delete(
@@ -499,7 +499,7 @@ class TestAsyncDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get_memory_context(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.get_memory_context(
@@ -507,7 +507,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get_memory_context(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.get_memory_context(
@@ -519,7 +519,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert_matches_type(DrmInstanceGetMemoryContextResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get_memory_context(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.get_memory_context(
@@ -533,7 +533,7 @@ class TestAsyncDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get_messages(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.get_messages(
@@ -541,7 +541,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get_messages(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.get_messages(
@@ -553,7 +553,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert_matches_type(DrmInstanceGetMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get_messages(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.get_messages(
@@ -567,7 +567,7 @@ class TestAsyncDrmInstances:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_log_messages(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.log_messages(
@@ -576,7 +576,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_log_messages_with_all_params(self, async_client: AsyncEntities) -> None:
         drm_instance = await async_client.memory.drm_instances.log_messages(
@@ -586,7 +586,7 @@ class TestAsyncDrmInstances:
         )
         assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_log_messages(self, async_client: AsyncEntities) -> None:
         response = await async_client.memory.drm_instances.with_raw_response.log_messages(
@@ -599,7 +599,7 @@ class TestAsyncDrmInstances:
         drm_instance = await response.parse()
         assert_matches_type(DrmInstanceLogMessagesResponse, drm_instance, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_log_messages(self, async_client: AsyncEntities) -> None:
         async with async_client.memory.drm_instances.with_streaming_response.log_messages(
