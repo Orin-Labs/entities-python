@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-alpha.17 (2025-08-22)
+
+Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)
+
+### Chores
+
+* **internal:** codegen related update ([106bc45](https://github.com/Orin-Labs/entities-python/commit/106bc45b7eb5252212cf4a00cf6c03d1db7108cd))
+* **internal:** fix ruff target version ([eac1888](https://github.com/Orin-Labs/entities-python/commit/eac18887cf36644f507563175537f93e44e39201))
+* **internal:** update comment in script ([81ef3cd](https://github.com/Orin-Labs/entities-python/commit/81ef3cda0db813d6765a26bf601004717ab306af))
+* update @stainless-api/prism-cli to v5.15.0 ([68eba14](https://github.com/Orin-Labs/entities-python/commit/68eba14a473495ea01fabaad8fbac870943df008))
+* update github action ([b1be60d](https://github.com/Orin-Labs/entities-python/commit/b1be60d6f69d196de764b6b3fb8b1a9213c06e99))
+
 ## 0.1.0-alpha.16 (2025-08-05)
 
 Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/Orin-Labs/entities-python/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
