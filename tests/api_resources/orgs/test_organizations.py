@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestOrganizations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Entities) -> None:
         organization = client.orgs.organizations.create(
@@ -28,7 +28,7 @@ class TestOrganizations:
         )
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.create(
@@ -40,7 +40,7 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.create(
@@ -54,7 +54,7 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Entities) -> None:
         organization = client.orgs.organizations.retrieve(
@@ -62,7 +62,7 @@ class TestOrganizations:
         )
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.retrieve(
@@ -74,7 +74,7 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.retrieve(
@@ -88,7 +88,7 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Entities) -> None:
         organization = client.orgs.organizations.update(
@@ -97,7 +97,7 @@ class TestOrganizations:
         )
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.update(
@@ -110,7 +110,7 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.update(
@@ -125,13 +125,13 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Entities) -> None:
         organization = client.orgs.organizations.list()
         assert_matches_type(OrganizationListResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.list()
@@ -141,7 +141,7 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(OrganizationListResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.list() as response:
@@ -153,7 +153,7 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Entities) -> None:
         organization = client.orgs.organizations.delete(
@@ -161,7 +161,7 @@ class TestOrganizations:
         )
         assert organization is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Entities) -> None:
         response = client.orgs.organizations.with_raw_response.delete(
@@ -173,7 +173,7 @@ class TestOrganizations:
         organization = response.parse()
         assert organization is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Entities) -> None:
         with client.orgs.organizations.with_streaming_response.delete(
@@ -193,7 +193,7 @@ class TestAsyncOrganizations:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.create(
@@ -201,7 +201,7 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.create(
@@ -213,7 +213,7 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.create(
@@ -227,7 +227,7 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.retrieve(
@@ -235,7 +235,7 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.retrieve(
@@ -247,7 +247,7 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.retrieve(
@@ -261,7 +261,7 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.update(
@@ -270,7 +270,7 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.update(
@@ -283,7 +283,7 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(Organization, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.update(
@@ -298,13 +298,13 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.list()
         assert_matches_type(OrganizationListResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.list()
@@ -314,7 +314,7 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(OrganizationListResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.list() as response:
@@ -326,7 +326,7 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncEntities) -> None:
         organization = await async_client.orgs.organizations.delete(
@@ -334,7 +334,7 @@ class TestAsyncOrganizations:
         )
         assert organization is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncEntities) -> None:
         response = await async_client.orgs.organizations.with_raw_response.delete(
@@ -346,7 +346,7 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert organization is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncEntities) -> None:
         async with async_client.orgs.organizations.with_streaming_response.delete(
